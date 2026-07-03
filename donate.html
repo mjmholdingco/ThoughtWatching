@@ -2,127 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support the Library</title>
 
-<title>Donate | THOUGHT WATCHING</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-/* Minimal donation styling layered on top of your main CSS */
-
-.donate-wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.crypto-card {
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 25px;
-  background: transparent;
-}
-
-.crypto-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
-.crypto-address {
-  font-family: monospace;
-  font-size: 14px;
-  opacity: 0.7;
-  margin-bottom: 15px;
-  word-break: break-all;
-}
-
-.copy-btn {
-  background: none;
-  border: 1px solid rgba(0,0,0,0.2);
-  padding: 8px 14px;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.copy-btn:hover {
-  background: black;
-  color: white;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  <div class="nav">
-    <div class="logo">THOUGHT WATCHING</div>
+<div class="page">
 
- <div class="links">
-      <a href="index.html">Art</a>
-      <a href="#">Thoughts</a>
-      <a href="#">Submission</a>
-      <a href="donate.html">Donate</a>
-    </div>
+<nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="book-collection.html">Book Collection</a>
+    <a href="shop.html">Shop</a>
+    <a href="donate.html">Donate</a>
+</nav>
 
-    <div class="search">
-    
-    </div>
-  </div>
+<header class="hero">
+    <div class="label">Support</div>
+
+    <h1>Support the Library</h1>
+
+    <p>
+        If you enjoy this collection and would like to help preserve and expand it,
+        cryptocurrency donations are greatly appreciated. Every contribution helps
+        support research, new book additions, website improvements, and hosting costs.
+    </p>
 </header>
 
-<section class="hero">
-  <h1>Support the Gallery</h1>
-  <p>A quiet contribution keeps the archive alive.</p>
-</section>
+<section class="section">
 
-<main>
+<div class="section-title">Cryptocurrency</div>
 
-<div class="donate-wrap">
+<div class="donation-card">
 
-  <div class="crypto-card">
-    <div class="crypto-title">Bitcoin (BTC)</div>
-    <div class="crypto-address" id="btc">bc1qfakebitcoinaddress123456789</div>
-    <button class="copy-btn" onclick="copyText('btc')">Copy Address</button>
-  </div>
+    <div class="coin-name">
+        ₿ Bitcoin
+    </div>
 
-  <div class="crypto-card">
-    <div class="crypto-title">Ethereum (ETH)</div>
-    <div class="crypto-address" id="eth">0xFakeEthereumAddress123456789</div>
-    <button class="copy-btn" onclick="copyText('eth')">Copy Address</button>
-  </div>
+    <div class="wallet-address" id="btc">
+        YOUR_BITCOIN_ADDRESS
+    </div>
 
-  <div class="crypto-card">
-    <div class="crypto-title">Litecoin (LTC)</div>
-    <div class="crypto-address" id="ltc">LTCFakeAddress123456789</div>
-    <button class="copy-btn" onclick="copyText('ltc')">Copy Address</button>
-  </div>
+    <button class="copy-btn" onclick="copyAddress('btc')">
+        Copy Address
+    </button>
 
 </div>
 
-</main>
+<div class="donation-card">
+
+    <div class="coin-name">
+        Ξ Ethereum
+    </div>
+
+    <div class="wallet-address" id="eth">
+        YOUR_ETHEREUM_ADDRESS
+    </div>
+
+    <button class="copy-btn" onclick="copyAddress('eth')">
+        Copy Address
+    </button>
+
+</div>
+
+<div class="donation-card">
+
+    <div class="coin-name">
+        Ł Litecoin
+    </div>
+
+    <div class="wallet-address" id="ltc">
+        YOUR_LITECOIN_ADDRESS
+    </div>
+
+    <button class="copy-btn" onclick="copyAddress('ltc')">
+        Copy Address
+    </button>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-title">Thank You</div>
+
+<p class="text">
+This library is built with the goal of making influential books and ideas more
+accessible. Thank you for helping preserve and grow this collection for readers
+around the world.
+</p>
+
+</section>
+
+<footer class="footer">
+Psychology Archive
+</footer>
+
+</div>
 
 <script>
-function copyText(id) {
-  const text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text);
+function copyAddress(id){
 
-  const btn = event.target;
-  btn.innerText = "Copied";
+const text=document.getElementById(id).innerText;
 
-  setTimeout(() => {
-    btn.innerText = "Copy Address";
-  }, 1200);
+navigator.clipboard.writeText(text);
+
+alert("Wallet address copied.");
+
 }
 </script>
 

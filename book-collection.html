@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book Collection</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="book-collection.html">Book Collection</a>
+  <a href="shop.html">Shop</a>
+  <a href="donate.html">Donate</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="label">Library</div>
+  <h1>Psychology Book Collection</h1>
+  <p>
+    A growing archive of foundational psychology texts organized by thinker, idea, and influence.
+  </p>
+</header>
+
+<!-- SEARCH -->
+<input type="text" id="searchInput" class="search-bar" placeholder="Search books, authors, or ideas...">
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="filter-btn" onclick="filterGenre('all')">All</button>
+  <button class="filter-btn" onclick="filterGenre('psychoanalysis')">Psychoanalysis</button>
+  <button class="filter-btn" onclick="filterGenre('behaviorism')">Behaviorism</button>
+  <button class="filter-btn" onclick="filterGenre('humanistic')">Humanistic</button>
+  <button class="filter-btn" onclick="filterGenre('developmental')">Developmental</button>
+  <button class="filter-btn" onclick="filterGenre('cognitive')">Cognitive</button>
+</div>
+
+<!-- TABLE HEADER -->
+<div class="row header-row">
+  <div>Title</div>
+  <div>Author</div>
+  <div>Year</div>
+  <div>Genre</div>
+</div>
+
+<!-- BOOKS -->
+<div id="bookList">
+
+  <div class="row book-item" data-genre="psychoanalysis">
+    <div class="cell">The Interpretation of Dreams</div>
+    <div class="cell">Sigmund Freud</div>
+    <div class="cell">1899</div>
+    <div class="cell genre">Psychoanalysis</div>
+  </div>
+
+  <div class="row book-item" data-genre="psychoanalysis">
+    <div class="cell">Civilization and Its Discontents</div>
+    <div class="cell">Sigmund Freud</div>
+    <div class="cell">1930</div>
+    <div class="cell genre">Psychoanalysis</div>
+  </div>
+
+  <div class="row book-item" data-genre="analytical">
+    <div class="cell">Man and His Symbols</div>
+    <div class="cell">Carl Jung</div>
+    <div class="cell">1964</div>
+    <div class="cell genre">Analytical Psychology</div>
+  </div>
+
+  <div class="row book-item" data-genre="behaviorism">
+    <div class="cell">Beyond Freedom and Dignity</div>
+    <div class="cell">B.F. Skinner</div>
+    <div class="cell">1971</div>
+    <div class="cell genre">Behaviorism</div>
+  </div>
+
+  <div class="row book-item" data-genre="developmental">
+    <div class="cell">The Origins of Intelligence in Children</div>
+    <div class="cell">Jean Piaget</div>
+    <div class="cell">1952</div>
+    <div class="cell genre">Developmental</div>
+  </div>
+
+  <div class="row book-item" data-genre="humanistic">
+    <div class="cell">On Becoming a Person</div>
+    <div class="cell">Carl Rogers</div>
+    <div class="cell">1961</div>
+    <div class="cell genre">Humanistic</div>
+  </div>
+
+  <div class="row book-item" data-genre="humanistic">
+    <div class="cell">Motivation and Personality</div>
+    <div class="cell">Abraham Maslow</div>
+    <div class="cell">1954</div>
+    <div class="cell genre">Human Motivation</div>
+  </div>
+
+  <div class="row book-item" data-genre="existential">
+    <div class="cell">Man’s Search for Meaning</div>
+    <div class="cell">Viktor Frankl</div>
+    <div class="cell">1946</div>
+    <div class="cell genre">Existential</div>
+  </div>
+
+  <div class="row book-item" data-genre="functional">
+    <div class="cell">The Principles of Psychology</div>
+    <div class="cell">William James</div>
+    <div class="cell">1890</div>
+    <div class="cell genre">Functional Psychology</div>
+  </div>
+
+</div>
+
+</div>
+
+<!-- JS -->
+<script>
+const searchInput = document.getElementById("searchInput");
+const books = document.querySelectorAll(".book-item");
+
+searchInput.addEventListener("keyup", function () {
+  const value = this.value.toLowerCase();
+
+  books.forEach(book => {
+    const text = book.innerText.toLowerCase();
+    book.style.display = text.includes(value) ? "grid" : "none";
+  });
+});
+
+function filterGenre(genre) {
+  books.forEach(book => {
+    if (genre === "all") {
+      book.style.display = "grid";
+    } else {
+      book.style.display =
+        book.getAttribute("data-genre") === genre ? "grid" : "none";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
