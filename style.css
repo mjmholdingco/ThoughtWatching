@@ -1,0 +1,608 @@
+:root {
+  --bg: #f6f5f2;
+  --text: #1b1b1b;
+  --muted: #6e6e6e;
+  --line: rgba(0,0,0,0.08);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Page layout */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 90px 28px;
+}
+
+/* HERO SECTION */
+.hero {
+  margin-bottom: 70px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1.15;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 620px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* CARD LINKS */
+.card {
+  text-decoration: none;
+  color: inherit;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateX(6px);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.card-meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 60px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+:root {
+  --bg: #f6f5f2;
+  --text: #1b1b1b;
+  --muted: #6e6e6e;
+  --line: rgba(0,0,0,0.08);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* PAGE */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 90px 28px;
+}
+
+/* HERO */
+.hero {
+  margin-bottom: 70px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1.15;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 650px;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+/* CONTENT BLOCKS */
+.card-block {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.card-meta {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* TEXT */
+.text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #2a2a2a;
+}
+
+/* META BOX */
+.meta-box {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* QUOTE */
+.quote {
+  font-family: "Fraunces", serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text);
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 60px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* NAVIGATION */
+.nav {
+  position: fixed;
+  top: 28px;
+  right: 28px;
+  display: flex;
+  gap: 22px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 1000;
+}
+
+.nav a {
+  text-decoration: none;
+  color: rgba(27, 27, 27, 0.75);
+  transition: 0.2s ease;
+}
+
+.nav a:hover {
+  color: rgba(27, 27, 27, 1);
+}
+
+
+/* SEARCH BAR */
+.search-bar {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: transparent;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+/* FILTER BUTTONS */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.filter-btn {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* TABLE LAYOUT */
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.header-row {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.6);
+}
+
+.cell {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: rgba(0,0,0,0.85);
+}
+
+.genre {
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
+}
+
+/* DONATION PAGE */
+
+.donation-card{
+
+border:1px solid rgba(0,0,0,.08);
+
+padding:28px;
+
+margin-bottom:22px;
+
+transition:.25s;
+
+}
+
+.donation-card:hover{
+
+border-color:rgba(0,0,0,.18);
+
+}
+
+.coin-name{
+
+font-family:"Fraunces",serif;
+
+font-size:28px;
+
+margin-bottom:18px;
+
+}
+
+.wallet-address{
+
+font-family:monospace;
+
+font-size:14px;
+
+word-break:break-all;
+
+padding:14px;
+
+background:rgba(0,0,0,.03);
+
+margin-bottom:18px;
+
+}
+
+.copy-btn{
+
+font-family:"Inter",sans-serif;
+
+font-size:12px;
+
+letter-spacing:.08em;
+
+text-transform:uppercase;
+
+padding:10px 18px;
+
+background:transparent;
+
+border:1px solid rgba(0,0,0,.12);
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.copy-btn:hover{
+
+background:rgba(0,0,0,.05);
+
+}
+
+/* ==========================================
+   SHOP
+========================================== */
+
+.shop-section{
+
+margin-top:90px;
+
+}
+
+.shop-header{
+
+margin-bottom:22px;
+
+}
+
+.shop-header h2{
+
+font-family:"Fraunces",serif;
+
+font-size:28px;
+
+font-weight:400;
+
+letter-spacing:.01em;
+
+}
+
+/* ---------- Horizontal Shelf ---------- */
+
+.shop-row{
+
+display:flex;
+
+gap:22px;
+
+overflow-x:auto;
+
+overflow-y:hidden;
+
+padding:4px 2px 14px;
+
+scrollbar-width:none;
+
+scroll-behavior:smooth;
+
+}
+
+.shop-row::-webkit-scrollbar{
+
+display:none;
+
+}
+
+/* ---------- Product Card ---------- */
+
+.product-card{
+
+flex:0 0 215px;
+
+transition:.28s ease;
+
+cursor:pointer;
+
+}
+
+.product-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+/* ---------- Product Image ---------- */
+
+.product-image{
+
+width:100%;
+
+height:285px;
+
+background:#f5f5f2;
+
+border-radius:8px;
+
+margin-bottom:16px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+transition:.28s ease;
+
+}
+
+.product-card:hover .product-image{
+
+background:#ededea;
+
+}
+
+/* Future product images */
+
+.product-image img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+/* ---------- Product Title ---------- */
+
+.product-card h3{
+
+font-family:"Fraunces",serif;
+
+font-size:19px;
+
+font-weight:400;
+
+line-height:1.35;
+
+margin-bottom:8px;
+
+color:#1f1f1f;
+
+}
+
+/* ---------- Description ---------- */
+
+.product-card p{
+
+font-family:"Inter",sans-serif;
+
+font-size:13px;
+
+line-height:1.6;
+
+color:#878787;
+
+margin:0;
+
+}
+
+/* ---------- Hover ---------- */
+
+.product-card:hover h3{
+
+color:#000;
+
+}
+
+.product-card:hover p{
+
+color:#666;
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:768px){
+
+.shop-section{
+
+margin-top:70px;
+
+}
+
+.shop-header h2{
+
+font-size:24px;
+
+}
+
+.product-card{
+
+flex:0 0 170px;
+
+}
+
+.product-image{
+
+height:235px;
+
+}
+
+.product-card h3{
+
+font-size:17px;
+
+}
+
+.product-card p{
+
+font-size:12px;
+
+}
+
+/* ==========================================
+   BOOK AFFILIATE LINKS (CLEAN STYLE)
+========================================== */
+
+.book-link{
+
+text-decoration:none;
+
+color:inherit;
+
+display:inline-block;
+
+}
+
+.book-link .card-title{
+
+transition:all .2s ease;
+
+}
+
+.book-link:hover .card-title{
+
+text-decoration:underline;
+
+text-decoration-thickness:1px;
+
+text-underline-offset:4px;
+
+color:#000;
+
+}
+
+}

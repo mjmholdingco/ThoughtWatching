@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<title>Book Finder</title>
+
+<meta name="description" content="Explore books by author, genre, subject, period, and idea. Search the collection or browse by category.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="hero">
+
+  <div class="label">Library</div>
+
+  <h1>Book Finder</h1>
+
+  <p>
+    Explore books by author, genre, subject, period, and idea.
+    Search the collection or browse by category.
+  </p>
+
+</header>
+
+<input
+  type="text"
+  id="searchInput"
+  class="search-bar"
+  placeholder="Search books, authors, genres, or ideas..."
+>
+
+<div class="filters">
+
+  <button class="filter-btn active" data-genre="all">
+    All
+  </button>
+
+  <button class="filter-btn" data-genre="psychology">
+    Psychology
+  </button>
+
+  <button class="filter-btn" data-genre="philosophy">
+    Philosophy
+  </button>
+
+  <button class="filter-btn" data-genre="spirituality">
+    Spirituality
+  </button>
+
+  <button class="filter-btn" data-genre="religion">
+    Religion
+  </button>
+
+  <button class="filter-btn" data-genre="fiction">
+    Fiction
+  </button>
+
+  <button class="filter-btn" data-genre="science">
+    Science
+  </button>
+
+</div>
+
+<div class="row header-row">
+
+  <div>Title</div>
+
+  <div>Author</div>
+
+  <div>Year</div>
+
+  <div>Genre</div>
+
+</div>
+
+<!-- NO RESULTS MESSAGE -->
+<div id="noResults" class="no-results">
+  No books found matching your search.
+</div>
+
+<div id="bookList">
+
+<div
+  class="row book-item"
+  data-genre="fiction"
+  data-keywords="dystopia, government, surveillance, freedom, control, totalitarianism, politics, propaganda, society, oppression, truth, censorship, individuality, power"
+>
+  <div class="cell">
+    <a href="https://amzn.to/4yfM0FY" class="book-link" target="_blank" rel="nofollow sponsored noopener">1984</a>
+  </div>
+  <div class="cell">George Orwell</div>
+  <div class="cell">1949</div>
+  <div class="cell genre">Fiction</div>
+</div>
+
+<div
+  class="row book-item"
+  data-genre="spirituality"
+  data-keywords="fulfillment, purpose, spirituality, business, success, philosophy, personal growth, purpose in life, self improvement, humility, service, mindset, passion, wisdom, character"
+>
+  <div class="cell">
+    <a href="https://amzn.to/4cxNVNI" class="book-link" target="_blank" rel="nofollow sponsored noopener">A Compass to Fulfillment</a>
+  </div>
+  <div class="cell">Kazuo Inamori</div>
+  <div class="cell">2009</div>
+  <div class="cell genre">Spirituality</div>
+</div>
+
+<div
+  class="row book-item"
+  data-genre="spirituality"
+  data-keywords="consciousness, awakening, ego, spirituality, enlightenment, presence, inner peace, awareness, suffering, happiness, purpose, spiritual awakening, mindfulness, personal transformation"
+>
+  <div class="cell">
+    <a href="https://amzn.to/4xbs2Ls" class="book-link" target="_blank" rel="nofollow sponsored noopener">A New Earth</a>
+  </div>
+  <div class="cell">Eckhart Tolle</div>
+  <div class="cell">2005</div>
+  <div class="cell genre">Spirituality</div>
+</div>
+
+<div
+  class="row book-item"
+  data-genre="fiction"
+  data-keywords="political satire, revolution, government, power, corruption, communism, totalitarianism, propaganda, inequality, society, politics, freedom, oppression, leadership, animals"
+>
+  <div class="cell">
+    <a href="https://amzn.to/46tMYCN" class="book-link" target="_blank" rel="nofollow sponsored noopener">Animal Farm</a>
+  </div>
+  <div class="cell">George Orwell</div>
+  <div class="cell">1945</div>
+  <div class="cell genre">Fiction</div>
+</div>
+
+<div
+  class="row book-item"
+  data-genre="psychology"
+  data-keywords="habits, behavior, self improvement, productivity, discipline, motivation, goals, routines, success, personal growth, behavior change, consistency, identity, psychology, achievement"
+>
+  <div class="cell">
+    <a href="https://amzn.to/4gBZdmy" class="book-link" target="_blank" rel="nofollow sponsored noopener">Atomic Habits</a>
+  </div>
+  <div class="cell">James Clear</div>
+  <div class="cell">2018</div>
+  <div class="cell genre">Psychology</div>
+</div>
+
+<!-- KEEP ALL OF THE REST OF YOUR EXISTING BOOKS HERE EXACTLY AS THEY ARE -->
+
+</div>
+
+<script>
+
+const searchInput = document.getElementById("searchInput");
+
+const books = document.querySelectorAll(".book-item");
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+
+const noResults = document.getElementById("noResults");
+
+let currentGenre = "all";
+
+
+function updateBooks() {
+
+  const searchValue =
+    searchInput.value.toLowerCase().trim();
+
+  let visibleBooks = 0;
+
+
+  books.forEach(book => {
+
+    const text =
+      book.innerText.toLowerCase();
+
+    const keywords =
+      (book.getAttribute("data-keywords") || "")
+      .toLowerCase();
+
+    const searchableText =
+      text + " " + keywords;
+
+
+    const matchesSearch =
+      searchableText.includes(searchValue);
+
+
+    const matchesGenre =
+      currentGenre === "all" ||
+      book.getAttribute("data-genre") === currentGenre;
+
+
+    if (matchesSearch && matchesGenre) {
+
+      book.style.display = "grid";
+
+      visibleBooks++;
+
+    } else {
+
+      book.style.display = "none";
+
+    }
+
+  });
+
+
+  if (visibleBooks === 0) {
+
+    noResults.style.display = "block";
+
+  } else {
+
+    noResults.style.display = "none";
+
+  }
+
+}
+
+
+searchInput.addEventListener("input", function() {
+
+  updateBooks();
+
+});
+
+
+filterButtons.forEach(button => {
+
+  button.addEventListener("click", function() {
+
+    filterButtons.forEach(btn => {
+
+      btn.classList.remove("active");
+
+    });
+
+
+    this.classList.add("active");
+
+
+    currentGenre =
+      this.getAttribute("data-genre");
+
+
+    updateBooks();
+
+  });
+
+});
+
+</script>
+
+</body>
+
+</html>
