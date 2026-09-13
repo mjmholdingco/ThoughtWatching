@@ -36,12 +36,22 @@
 
 </header>
 
+
+<!-- ================================
+     SEARCH
+     ================================ -->
+
 <input
   type="text"
   id="searchInput"
   class="search-bar"
-  placeholder="Search books, authors, genres, or ideas..."
+  placeholder="Search books, authors, sub-genres, words, or subjects..."
 >
+
+
+<!-- ================================
+     GENRE FILTERS
+     ================================ -->
 
 <div class="filters">
 
@@ -51,6 +61,10 @@
 
   <button class="filter-btn" data-genre="psychology">
     Psychology
+  </button>
+
+  <button class="filter-btn" data-genre="self-help">
+    Self-Help
   </button>
 
   <button class="filter-btn" data-genre="philosophy">
@@ -65,15 +79,111 @@
     Religion
   </button>
 
-  <button class="filter-btn" data-genre="fiction">
-    Fiction
-  </button>
-
   <button class="filter-btn" data-genre="science">
     Science
   </button>
 
+  <button class="filter-btn" data-genre="history">
+    History
+  </button>
+
+  <button class="filter-btn" data-genre="biography-memoir">
+    Biography & Memoir
+  </button>
+
+  <button class="filter-btn" data-genre="business-finance">
+    Business & Finance
+  </button>
+
+  <button class="filter-btn" data-genre="travel">
+    Travel
+  </button>
+
+  <button class="filter-btn" data-genre="art-photography">
+    Art & Photography
+  </button>
+
+  <button class="filter-btn" data-genre="health-wellness">
+    Health & Wellness
+  </button>
+
+  <button class="filter-btn" data-genre="fantasy">
+    Fantasy
+  </button>
+
+  <button class="filter-btn" data-genre="science-fiction">
+    Science Fiction
+  </button>
+
+  <button class="filter-btn" data-genre="thriller">
+    Thriller
+  </button>
+
+  <button class="filter-btn" data-genre="mystery">
+    Mystery
+  </button>
+
+  <button class="filter-btn" data-genre="romance">
+    Romance
+  </button>
+
+  <button class="filter-btn" data-genre="horror">
+    Horror
+  </button>
+
+  <button class="filter-btn" data-genre="historical-fiction">
+    Historical Fiction
+  </button>
+
 </div>
+
+
+<!-- ================================
+     PAGE COUNT FILTER
+     ================================ -->
+
+<div class="page-filter">
+
+  <div class="page-filter-header">
+    <span>Pages</span>
+    <span id="page-range-display">50 - 1,000+</span>
+  </div>
+
+  <div class="page-slider">
+
+    <input
+      type="range"
+      id="min-pages"
+      min="50"
+      max="1000"
+      value="50"
+      step="10"
+      aria-label="Minimum pages"
+    >
+
+    <input
+      type="range"
+      id="max-pages"
+      min="50"
+      max="1000"
+      value="1000"
+      step="10"
+      aria-label="Maximum pages"
+    >
+
+  </div>
+
+  <div class="page-slider-labels">
+    <span>50</span>
+    <span>1,000+</span>
+  </div>
+
+</div>
+
+
+<!-- ================================
+     BOOK TABLE HEADER
+     ================================ -->
 
 <div class="row header-row">
 
@@ -87,31 +197,49 @@
 
 </div>
 
-<!-- NO RESULTS MESSAGE -->
+
+<!-- ================================
+     NO RESULTS MESSAGE
+     ================================ -->
+
 <div id="noResults" class="no-results" style="display: none;">
   No books found matching your search.
 </div>
 
+
+<!-- ================================
+     BOOK LIST
+     ================================ -->
+
 <div id="bookList">
 
 
+<!-- 01 - 1984 -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="dystopia, government, surveillance, freedom, control, totalitarianism, politics, propaganda, society, oppression, truth, censorship, individuality, power"
+  data-genre="science-fiction"
+  data-subgenre="dystopian-fiction"
+  data-pages="328"
+  data-keywords="dystopia, dystopian fiction, government, surveillance, totalitarianism, authoritarianism, freedom, control, propaganda, censorship, oppression, political power, politics, truth, individuality, privacy, technology, social control, rebellion, resistance, Big Brother, thought police, Newspeak, doublethink, war, fear, society"
 >
   <div class="cell">
     <a href="https://amzn.to/4yfM0FY" class="book-link" target="_blank" rel="nofollow sponsored noopener">1984</a>
   </div>
   <div class="cell">George Orwell</div>
   <div class="cell">1949</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Science Fiction</div>
 </div>
+
+
+<!-- 02 - A Compass to Fulfillment -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="fulfillment, purpose, spirituality, business, success, philosophy, personal growth, purpose in life, self improvement, humility, service, mindset, passion, wisdom, character"
+  data-subgenre="spiritual-growth"
+  data-pages="224"
+  data-keywords="fulfillment, purpose, spirituality, business, success, philosophy, personal growth, purpose in life, self improvement, humility, service, mindset, passion, wisdom, character, work, leadership, meaningful life, values, ethics, Japanese philosophy, business philosophy, motivation, personal fulfillment"
 >
   <div class="cell">
     <a href="https://amzn.to/4cxNVNI" class="book-link" target="_blank" rel="nofollow sponsored noopener">A Compass to Fulfillment</a>
@@ -121,10 +249,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 03 - A New Earth -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="consciousness, awakening, ego, spirituality, enlightenment, presence, inner peace, awareness, suffering, happiness, purpose, spiritual awakening, mindfulness, personal transformation"
+  data-subgenre="spiritual-awakening"
+  data-pages="336"
+  data-keywords="consciousness, awakening, ego, spirituality, enlightenment, presence, inner peace, awareness, suffering, happiness, purpose, spiritual awakening, mindfulness, personal transformation, consciousness evolution, living in the present, self awareness, human consciousness, spiritual growth, relationships, ego identity, awakening"
 >
   <div class="cell">
     <a href="https://amzn.to/4xbs2Ls" class="book-link" target="_blank" rel="nofollow sponsored noopener">A New Earth</a>
@@ -134,23 +267,33 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 04 - Animal Farm -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="political satire, revolution, government, power, corruption, communism, totalitarianism, propaganda, inequality, society, politics, freedom, oppression, leadership, animals"
+  data-genre="historical-fiction"
+  data-subgenre="political-satire"
+  data-pages="112"
+  data-keywords="political satire, revolution, government, power, corruption, communism, totalitarianism, propaganda, inequality, society, politics, freedom, oppression, leadership, animals, political allegory, socialism, authoritarianism, dictatorship, class struggle, political corruption, manipulation, tyranny, George Orwell, farm animals, social commentary, human nature"
 >
   <div class="cell">
     <a href="https://amzn.to/46tMYCN" class="book-link" target="_blank" rel="nofollow sponsored noopener">Animal Farm</a>
   </div>
   <div class="cell">George Orwell</div>
   <div class="cell">1945</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Historical Fiction</div>
 </div>
+
+
+<!-- 05 - Atomic Habits -->
 
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="habits, behavior, self improvement, productivity, discipline, motivation, goals, routines, success, personal growth, behavior change, consistency, identity, psychology, achievement"
+  data-subgenre="behavior-change"
+  data-pages="320"
+  data-keywords="habits, behavior, self improvement, productivity, discipline, motivation, goals, routines, success, personal growth, behavior change, consistency, identity, psychology, achievement, habit formation, daily habits, good habits, bad habits, goal setting, behavioral psychology, environment, decision making, self discipline, personal development, success habits, lifestyle change"
 >
   <div class="cell">
     <a href="https://amzn.to/4gBZdmy" class="book-link" target="_blank" rel="nofollow sponsored noopener">Atomic Habits</a>
@@ -160,10 +303,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 06 - Awaken the Giant Within -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="personal development, motivation, success, goals, confidence, potential, achievement, mindset, self improvement, personal growth, performance, leadership"
+  data-subgenre="personal-development"
+  data-pages="544"
+  data-keywords="personal development, motivation, success, goals, confidence, potential, achievement, mindset, self improvement, personal growth, performance, leadership, beliefs, decision making, emotions, relationships, communication, financial success, health, goal setting, human behavior, peak performance, confidence building, life change, personal power"
 >
   <div class="cell">
     <a href="https://amzn.to/4igfbEc" class="book-link" target="_blank" rel="nofollow sponsored noopener">Awaken the Giant Within</a>
@@ -173,10 +321,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 07 - Battlefield of the Mind -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="spiritual warfare, christianity, faith, thoughts, mind, temptation, fear, spiritual battle, prayer, biblical, freedom, strongholds"
+  data-subgenre="christian-spiritual-warfare"
+  data-pages="288"
+  data-keywords="spiritual warfare, Christianity, faith, thoughts, mind, temptation, fear, spiritual battle, prayer, biblical, freedom, strongholds, negative thoughts, spiritual growth, Christian living, renewing the mind, anxiety, worry, Bible, mental battles, spiritual victory, God, overcoming fear, Christian psychology"
 >
   <div class="cell">
     <a href="https://amzn.to/4hbm7RQ" class="book-link" target="_blank" rel="nofollow sponsored noopener">Battlefield of the Mind</a>
@@ -186,36 +339,51 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 08 - Behind Her Eyes -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="psychological thriller, mystery, marriage, secrets, deception, relationships, suspense, crime, murder, obsession"
+  data-genre="thriller"
+  data-subgenre="psychological-thriller"
+  data-pages="384"
+  data-keywords="psychological thriller, mystery, marriage, secrets, deception, relationships, suspense, crime, murder, obsession, manipulation, domestic thriller, psychological suspense, toxic relationships, infidelity, friendship, betrayal, hidden secrets, unreliable characters, twist, shocking ending, Sarah Pinborough"
 >
   <div class="cell">
     <a href="https://amzn.to/4xeuVvg" class="book-link" target="_blank" rel="nofollow sponsored noopener">Behind Her Eyes</a>
   </div>
   <div class="cell">Sarah Pinborough</div>
   <div class="cell">2017</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 09 - Birthday Girl -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="romance, relationships, love, family, drama, secrets, obsession, young woman"
+  data-genre="romance"
+  data-subgenre="contemporary-romance"
+  data-pages="368"
+  data-keywords="romance, contemporary romance, relationships, love, family, drama, secrets, obsession, young woman, forbidden relationship, age gap, emotional romance, friendship, attraction, complicated relationships, desire, heartbreak, family relationships, coming of age, romantic drama"
 >
   <div class="cell">
     <a href="https://amzn.to/4qTTWtT" class="book-link" target="_blank" rel="nofollow sponsored noopener">Birthday Girl</a>
   </div>
   <div class="cell">Penelope Douglas</div>
   <div class="cell">2018</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Romance</div>
 </div>
+
+
+<!-- 10 - Blink -->
 
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="psychology, decision making, intuition, thinking, judgment, behavior, cognitive biases, memory, perception, human mind"
+  data-subgenre="cognitive-psychology"
+  data-pages="296"
+  data-keywords="psychology, decision making, intuition, thinking, judgment, behavior, cognitive biases, memory, perception, human mind, snap judgments, first impressions, rapid decisions, unconscious thinking, instinct, reasoning, judgment errors, human behavior, social psychology, cognition, Malcolm Gladwell"
 >
   <div class="cell">
     <a href="https://amzn.to/4gRmPCi" class="book-link" target="_blank" rel="nofollow sponsored noopener">Blink</a>
@@ -225,10 +393,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 11 - Breath as Prayer -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="prayer, christianity, breath, spirituality, worship, faith, presence of God, meditation, devotion"
+  data-subgenre="christian-prayer"
+  data-pages="176"
+  data-keywords="prayer, Christianity, breath, spirituality, worship, faith, presence of God, meditation, devotion, breathing, Christian meditation, prayer practice, quiet time, spiritual discipline, mindfulness, peace, connection with God, daily prayer, spiritual life"
 >
   <div class="cell">
     <a href="https://amzn.to/4zXhDFR" class="book-link" target="_blank" rel="nofollow sponsored noopener">Breath as Prayer</a>
@@ -238,23 +411,33 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 12 - Chromosome 6 -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="medical thriller, genetics, DNA, science, biotechnology, viruses, medicine, conspiracy, disease, research"
+  data-genre="thriller"
+  data-subgenre="medical-thriller"
+  data-pages="480"
+  data-keywords="medical thriller, genetics, DNA, science, biotechnology, viruses, medicine, conspiracy, disease, research, genetic engineering, cloning, medical science, laboratory, scientists, human evolution, genetics research, biological warfare, crime, suspense, medical mystery, Robin Cook"
 >
   <div class="cell">
     <a href="https://amzn.to/4qXFVvb" class="book-link" target="_blank" rel="nofollow sponsored noopener">Chromosome 6</a>
   </div>
   <div class="cell">Robin Cook</div>
   <div class="cell">1997</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 13 - Courage -->
 
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="courage, bravery, fear, personal growth, resilience, confidence, overcoming fear, strength, self improvement"
+  data-subgenre="personal-development"
+  data-pages="192"
+  data-keywords="courage, bravery, fear, personal growth, resilience, confidence, overcoming fear, strength, self improvement, personal development, risk, uncertainty, change, authenticity, inner strength, boldness, confidence building, fear of failure, emotional courage, taking risks"
 >
   <div class="cell">
     <a href="https://amzn.to/4gXCJLP" class="book-link" target="_blank" rel="nofollow sponsored noopener">Courage</a>
@@ -264,36 +447,51 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 14 - Crime and Punishment -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="russia, morality, guilt, crime, murder, redemption, religion, philosophy, psychology, justice, suffering"
+  data-genre="philosophy"
+  data-subgenre="philosophical-fiction"
+  data-pages="576"
+  data-keywords="Russia, morality, guilt, crime, murder, redemption, religion, philosophy, psychology, justice, suffering, faith, sin, conscience, free will, ethics, human nature, poverty, alienation, existentialism, crime and punishment, guilt and redemption, Fyodor Dostoevsky"
 >
   <div class="cell">
     <a href="https://amzn.to/4ib0LoI" class="book-link" target="_blank" rel="nofollow sponsored noopener">Crime and Punishment</a>
   </div>
   <div class="cell">Fyodor Dostoevsky</div>
   <div class="cell">1866</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Philosophy</div>
 </div>
+
+
+<!-- 15 - Dark Matter -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="science fiction, time travel, alternate reality, quantum physics, reality, technology, parallel worlds, mystery, fate"
+  data-genre="science-fiction"
+  data-subgenre="science-fiction-thriller"
+  data-pages="342"
+  data-keywords="science fiction, time travel, alternate reality, quantum physics, reality, technology, parallel worlds, mystery, fate, identity, family, marriage, choices, alternate lives, multiverse, quantum mechanics, science, physics, consciousness, possibility, destiny, love, thriller, suspense, Blake Crouch"
 >
   <div class="cell">
     <a href="https://amzn.to/4xfSQdN" class="book-link" target="_blank" rel="nofollow sponsored noopener">Dark Matter</a>
   </div>
   <div class="cell">Blake Crouch</div>
   <div class="cell">2016</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Science Fiction</div>
 </div>
+
+
+<!-- 16 - Everything Is One Thing -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="spirituality, consciousness, unity, oneness, existence, philosophy, God, self, awareness, spiritual growth"
+  data-subgenre="consciousness"
+  data-pages="160"
+  data-keywords="spirituality, consciousness, unity, oneness, existence, philosophy, God, self, awareness, spiritual growth, consciousness studies, nonduality, unity consciousness, identity, reality, God and self, spiritual awakening, inner awareness, philosophy of existence, universal consciousness"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0F92NQGVL" class="book-link" target="_blank" rel="nofollow sponsored noopener">Everything Is One Thing</a>
@@ -303,23 +501,33 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 17 - Gone Girl -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="psychological thriller, murder, mystery, marriage, relationships, crime, deception, secrets, manipulation"
+  data-genre="thriller"
+  data-subgenre="psychological-thriller"
+  data-pages="432"
+  data-keywords="psychological thriller, murder, mystery, marriage, relationships, crime, deception, secrets, manipulation, suspense, betrayal, missing person, husband and wife, unreliable narrator, toxic marriage, revenge, obsession, psychological manipulation, identity, domestic thriller, lies, Gillian Flynn"
 >
   <div class="cell">
     <a href="https://amzn.to/3UEOJKy" class="book-link" target="_blank" rel="nofollow sponsored noopener">Gone Girl</a>
   </div>
   <div class="cell">Gillian Flynn</div>
   <div class="cell">2012</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 18 - Higher Powers of Mind and Spirit -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="mind, spirit, consciousness, higher consciousness, spirituality, metaphysics, personal growth, wisdom, inner development"
+  data-subgenre="metaphysics"
+  data-pages="224"
+  data-keywords="mind, spirit, consciousness, higher consciousness, spirituality, metaphysics, personal growth, wisdom, inner development, spiritual philosophy, divine mind, universal mind, higher self, spiritual awareness, inner wisdom, spiritual development, metaphysical philosophy"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GNH9L9YH" class="book-link" target="_blank" rel="nofollow sponsored noopener">Higher Powers of Mind and Spirit</a>
@@ -329,10 +537,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 19 - Humility -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="humility, holiness, christianity, faith, God, spiritual growth, virtue, character, pride, devotion"
+  data-subgenre="christian-spirituality"
+  data-pages="112"
+  data-keywords="humility, holiness, Christianity, faith, God, spiritual growth, virtue, character, pride, devotion, Christian humility, sanctification, spiritual life, obedience, grace, prayer, discipleship, Christian character, selflessness, pride and humility"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GNZRMCDD" class="book-link" target="_blank" rel="nofollow sponsored noopener">Humility: The Beauty of Holiness</a>
@@ -342,10 +555,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 20 - In Tune with the Infinite -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="infinite mind, spirituality, prosperity, abundance, consciousness, faith, divine intelligence, success, metaphysics, positive thinking"
+  data-subgenre="metaphysics"
+  data-pages="256"
+  data-keywords="infinite mind, spirituality, prosperity, abundance, consciousness, faith, divine intelligence, success, metaphysics, positive thinking, universal mind, higher consciousness, spiritual wealth, divine power, inner power, personal growth, spiritual philosophy, mind power, success, Ralph Waldo Trine"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0G4L9TKKN" class="book-link" target="_blank" rel="nofollow sponsored noopener">In Tune with the Infinite</a>
@@ -355,23 +573,33 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 21 - It Ends with Us -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="romance, love, relationships, family, trauma, abuse, healing, emotional drama"
+  data-genre="romance"
+  data-subgenre="contemporary-romance"
+  data-pages="384"
+  data-keywords="romance, love, relationships, family, trauma, abuse, healing, emotional drama, domestic abuse, toxic relationships, emotional healing, motherhood, family conflict, resilience, friendship, contemporary romance, romantic drama, difficult relationships, personal growth, recovery"
 >
   <div class="cell">
     <a href="https://amzn.to/3UGYqbl" class="book-link" target="_blank" rel="nofollow sponsored noopener">It Ends with Us</a>
   </div>
   <div class="cell">Colleen Hoover</div>
   <div class="cell">2016</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Romance</div>
 </div>
+
+
+<!-- 22 - Jonathan Livingston Seagull -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="purpose, meaning, freedom, self discovery, spirituality, personal growth, philosophy, consciousness, peace, inspiration"
+  data-subgenre="spiritual-philosophy"
+  data-pages="144"
+  data-keywords="purpose, meaning, freedom, self discovery, spirituality, personal growth, philosophy, consciousness, peace, inspiration, individuality, perfection, nature, flying, dreams, purpose in life, self realization, spiritual growth, inner potential, inspirational fiction, Richard Bach"
 >
   <div class="cell">
     <a href="https://amzn.to/4gC36Ia" class="book-link" target="_blank" rel="nofollow sponsored noopener">Jonathan Livingston Seagull</a>
@@ -381,10 +609,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 23 - Man and His Symbols -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="psychology, Jung, symbols, dreams, unconscious, archetypes, mythology, self discovery, spirituality"
+  data-subgenre="analytical-psychology"
+  data-pages="384"
+  data-keywords="psychology, Jung, symbols, dreams, unconscious, archetypes, mythology, self discovery, spirituality, Carl Jung, analytical psychology, collective unconscious, symbolism, dream analysis, human psyche, unconscious mind, self knowledge, personality, religion, human nature"
 >
   <div class="cell">
     <a href="https://amzn.to/4hcbXjY" class="book-link" target="_blank" rel="nofollow sponsored noopener">Man and His Symbols</a>
@@ -394,10 +627,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 24 - Meditations -->
+
 <div
   class="row book-item"
   data-genre="philosophy"
-  data-keywords="stoicism, philosophy, wisdom, virtue, self discipline, mortality, life, Marcus Aurelius, ethics, resilience"
+  data-subgenre="stoicism"
+  data-pages="304"
+  data-keywords="Stoicism, philosophy, wisdom, virtue, self discipline, mortality, life, Marcus Aurelius, ethics, resilience, ancient philosophy, stoic philosophy, self control, emotional control, acceptance, death, purpose, character, rationality, adversity, inner peace, personal responsibility, virtue ethics, Roman philosophy"
 >
   <div class="cell">
     <a href="https://amzn.to/46tRam1" class="book-link" target="_blank" rel="nofollow sponsored noopener">Meditations</a>
@@ -407,23 +645,33 @@
   <div class="cell genre">Philosophy</div>
 </div>
 
+
+<!-- 25 - No Country for Old Men -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="western, crime, violence, morality, evil, fate, Texas, murder, law, philosophy"
+  data-genre="thriller"
+  data-subgenre="crime-thriller"
+  data-pages="309"
+  data-keywords="western, crime, violence, morality, evil, fate, Texas, murder, law, philosophy, crime thriller, western thriller, cartel, drugs, border, justice, survival, human nature, good and evil, law enforcement, Cormac McCarthy"
 >
   <div class="cell">
     <a href="https://amzn.to/3VfpVcc" class="book-link" target="_blank" rel="nofollow sponsored noopener">No Country for Old Men</a>
   </div>
   <div class="cell">Cormac McCarthy</div>
   <div class="cell">2005</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 26 - On the Origin of Species -->
 
 <div
   class="row book-item"
   data-genre="science"
-  data-keywords="evolution, natural selection, biology, species, genetics, adaptation, science, nature, survival"
+  data-subgenre="evolutionary-science"
+  data-pages="502"
+  data-keywords="evolution, natural selection, biology, species, genetics, adaptation, science, nature, survival, evolution theory, Darwin, natural history, biological evolution, species adaptation, common descent, variation, heredity, survival of the fittest, natural selection, biodiversity, biology, life science"
 >
   <div class="cell">
     <a href="https://amzn.to/469xPX4" class="book-link" target="_blank" rel="nofollow sponsored noopener">On the Origin of Species</a>
@@ -433,10 +681,15 @@
   <div class="cell genre">Science</div>
 </div>
 
+
+<!-- 27 - Outliers -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="success, achievement, intelligence, opportunity, culture, performance, talent, education, social factors, psychology"
+  data-subgenre="success-psychology"
+  data-pages="336"
+  data-keywords="success, achievement, intelligence, opportunity, culture, performance, talent, education, social factors, psychology, success factors, hard work, environment, social class, practice, expertise, motivation, human potential, Malcolm Gladwell"
 >
   <div class="cell">
     <a href="https://amzn.to/4zU4QEl" class="book-link" target="_blank" rel="nofollow sponsored noopener">Outliers</a>
@@ -446,10 +699,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 28 - The Bait of Satan -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="Satan, temptation, offense, forgiveness, bitterness, christianity, spiritual warfare, faith, relationships, healing"
+  data-subgenre="christian-spiritual-warfare"
+  data-pages="256"
+  data-keywords="Satan, temptation, offense, forgiveness, bitterness, Christianity, spiritual warfare, faith, relationships, healing, anger, resentment, unforgiveness, spiritual battle, Christian life, emotional healing, conflict, betrayal, freedom, God"
 >
   <div class="cell">
     <a href="https://amzn.to/4cYJnA4" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Bait of Satan</a>
@@ -459,10 +717,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 29 - The Bible -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="Bible, Christianity, God, Jesus, faith, scripture, salvation, prayer, spirituality, religion"
+  data-subgenre="christian-scripture"
+  data-pages="1200"
+  data-keywords="Bible, Christianity, God, Jesus, faith, scripture, salvation, prayer, spirituality, religion, Old Testament, New Testament, Gospel, biblical history, Christian faith, Bible study, biblical teaching, wisdom, prophecy, commandments, discipleship, worship, sin, redemption, Holy Spirit"
 >
   <div class="cell">
     <a href="https://amzn.to/4cvMkYI" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Bible</a>
@@ -472,36 +735,51 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 30 - The Chronicles of Narnia -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="fantasy, adventure, magic, good versus evil, friendship, courage, mythology, children, Narnia"
+  data-genre="fantasy"
+  data-subgenre="epic-fantasy"
+  data-pages="767"
+  data-keywords="fantasy, adventure, magic, good versus evil, friendship, courage, mythology, children, Narnia, epic fantasy, magical world, talking animals, Christian themes, allegory, witches, kings, kingdoms, quests, heroes, battles, enchanted world, childhood fantasy, C. S. Lewis"
 >
   <div class="cell">
     <a href="https://amzn.to/3SNKFqS" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Chronicles of Narnia</a>
   </div>
   <div class="cell">C. S. Lewis</div>
   <div class="cell">1950</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 31 - The Couple Next Door -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="psychological thriller, marriage, neighbors, secrets, mystery, murder, suspense, relationships, deception"
+  data-genre="thriller"
+  data-subgenre="domestic-thriller"
+  data-pages="304"
+  data-keywords="psychological thriller, domestic thriller, marriage, neighbors, secrets, mystery, murder, suspense, relationships, deception, family, crime, missing baby, betrayal, lies, suspicion, suburban thriller, domestic suspense, Shari Lapena"
 >
   <div class="cell">
     <a href="https://amzn.to/46Iuu19" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Couple Next Door</a>
   </div>
   <div class="cell">Shari Lapena</div>
   <div class="cell">2016</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 32 - The Four Agreements -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="spirituality, agreements, personal freedom, self awareness, relationships, happiness, personal growth, beliefs, wisdom"
+  data-subgenre="personal-growth"
+  data-pages="160"
+  data-keywords="spirituality, agreements, personal freedom, self awareness, relationships, happiness, personal growth, beliefs, wisdom, personal development, self improvement, emotional freedom, limiting beliefs, communication, responsibility, integrity, authenticity, self knowledge, spiritual wisdom, Toltec wisdom"
 >
   <div class="cell">
     <a href="https://amzn.to/4x9xlLm" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Four Agreements</a>
@@ -511,10 +789,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 33 - The Fruit of the Spirit -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="fruit of the spirit, christianity, Bible, love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self control"
+  data-subgenre="christian-spirituality"
+  data-pages="176"
+  data-keywords="fruit of the spirit, Christianity, Bible, love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self control, Christian character, Holy Spirit, Galatians, spiritual growth, Christian living, virtue, discipleship, faith, grace, love of God, Christian virtues, biblical teaching"
 >
   <div class="cell">
     <a href="https://amzn.to/4r7gAz9" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Fruit of the Spirit</a>
@@ -524,10 +807,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 34 - The Happiness Hypothesis -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="happiness, psychology, philosophy, positive psychology, morality, meaning, relationships, virtue, well being"
+  data-subgenre="positive-psychology"
+  data-pages="288"
+  data-keywords="happiness, psychology, philosophy, positive psychology, morality, meaning, relationships, virtue, well being, happiness research, human nature, ancient wisdom, life satisfaction, meaning in life, character, human behavior, emotional well being, happiness science, Jonathan Haidt"
 >
   <div class="cell">
     <a href="https://amzn.to/4gTRGOY" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Happiness Hypothesis</a>
@@ -537,36 +825,51 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 35 - The Hour of the Dragon -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="fantasy, dragon, adventure, horror, Conan, magic, sorcery, war, mythology"
+  data-genre="fantasy"
+  data-subgenre="sword-and-sorcery"
+  data-pages="208"
+  data-keywords="fantasy, dragon, adventure, horror, Conan, magic, sorcery, war, mythology, sword and sorcery, heroic fantasy, ancient kingdoms, kings, warriors, battles, monsters, evil, revenge, Robert E. Howard"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GQHW24MR" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Hour of the Dragon</a>
   </div>
   <div class="cell">Robert E. Howard</div>
   <div class="cell">1935</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 36 - The Housemaid -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="psychological thriller, domestic thriller, secrets, manipulation, abuse, mystery, murder, suspense, housekeeper"
+  data-genre="thriller"
+  data-subgenre="domestic-thriller"
+  data-pages="336"
+  data-keywords="psychological thriller, domestic thriller, secrets, manipulation, abuse, mystery, murder, suspense, housekeeper, wealthy family, toxic marriage, deception, crime, revenge, hidden secrets, dangerous secrets, psychological suspense, domestic abuse, power, control, survival, Freida McFadden"
 >
   <div class="cell">
     <a href="https://amzn.to/4yf10ni" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Housemaid</a>
   </div>
   <div class="cell">Freida McFadden</div>
   <div class="cell">2022</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 37 - The Interpretation of Dreams -->
 
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="dreams, unconscious, psychology, Freud, psychoanalysis, symbols, mind, desire, interpretation"
+  data-subgenre="psychoanalysis"
+  data-pages="736"
+  data-keywords="dreams, unconscious, psychology, Freud, psychoanalysis, symbols, mind, desire, interpretation, dream interpretation, unconscious mind, subconscious, wish fulfillment, dream analysis, psychology of dreams, human desire, repression, sexuality, neurosis, psychoanalytic theory, Sigmund Freud"
 >
   <div class="cell">
     <a href="https://amzn.to/4gXJygp" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Interpretation of Dreams</a>
@@ -576,10 +879,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 38 - The Jungle of the Mind -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="mind, consciousness, thoughts, spirituality, self awareness, psychology, inner world, personal growth, meditation"
+  data-subgenre="consciousness"
+  data-pages="180"
+  data-keywords="mind, consciousness, thoughts, spirituality, self awareness, psychology, inner world, personal growth, meditation, mental patterns, inner life, self discovery, awareness, mindfulness, personal development, emotional patterns, thought patterns, inner peace"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GJLCJB7T" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Jungle of the Mind</a>
@@ -589,10 +897,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 39 - The Kybalion -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="hermeticism, philosophy, spirituality, metaphysics, mind, consciousness, universe, principles, mentalism, occult"
+  data-subgenre="hermeticism"
+  data-pages="144"
+  data-keywords="hermeticism, philosophy, spirituality, metaphysics, mind, consciousness, universe, principles, mentalism, occult, Hermetic philosophy, seven principles, correspondence, vibration, polarity, rhythm, cause and effect, gender, ancient wisdom, esoteric philosophy, spiritual philosophy"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GPDCBC7K" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Kybalion</a>
@@ -602,10 +915,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 40 - The Let Them Theory -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="relationships, boundaries, personal growth, self improvement, mindset, emotional health, expectations, letting go"
+  data-subgenre="personal-development"
+  data-pages="304"
+  data-keywords="relationships, boundaries, personal growth, self improvement, mindset, emotional health, expectations, letting go, control, acceptance, anxiety, emotional freedom, personal responsibility, stress, communication, self awareness, happiness, emotional well being, Mel Robbins"
 >
   <div class="cell">
     <a href="https://amzn.to/46I7gZ0" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Let Them Theory</a>
@@ -615,36 +933,51 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 41 - The Lord of the Rings -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="fantasy, adventure, epic, mythology, friendship, good versus evil, magic, war, Middle-earth"
+  data-genre="fantasy"
+  data-subgenre="epic-fantasy"
+  data-pages="1178"
+  data-keywords="fantasy, adventure, epic, mythology, friendship, good versus evil, magic, war, Middle-earth, epic fantasy, high fantasy, hobbits, elves, dwarves, wizards, quests, kingdoms, courage, sacrifice, evil, power, ring, Sauron, Mordor, J. R. R. Tolkien"
 >
   <div class="cell">
     <a href="https://amzn.to/466faLN" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Lord of the Rings</a>
   </div>
   <div class="cell">J. R. R. Tolkien</div>
   <div class="cell">1954</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 42 - The Man That Corrupted Hadleyburg -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="satire, society, corruption, human nature, small town, politics, humor, morality, American literature"
+  data-genre="humor"
+  data-subgenre="satire"
+  data-pages="72"
+  data-keywords="satire, society, corruption, human nature, small town, politics, humor, morality, American literature, Mark Twain, hypocrisy, greed, reputation, social criticism, American satire, short story, human weakness, temptation, deception, community"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GPJZFS58" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Man That Corrupted Hadleyburg</a>
   </div>
   <div class="cell">Mark Twain</div>
   <div class="cell">1900</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Humor</div>
 </div>
+
+
+<!-- 43 - The Master's Indwelling -->
 
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="Christianity, faith, God, Holy Spirit, indwelling, spiritual life, devotion, prayer, Bible, salvation"
+  data-subgenre="christian-spirituality"
+  data-pages="160"
+  data-keywords="Christianity, faith, God, Holy Spirit, indwelling, spiritual life, devotion, prayer, Bible, salvation, Christian spirituality, spiritual growth, presence of God, discipleship, Christian life, holiness, sanctification"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0H6H39WYD" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Master's Indwelling</a>
@@ -654,49 +987,69 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 44 - The Mississippi Scheme -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="adventure, Mississippi River, humor, satire, travel, American literature, river, Mark Twain"
+  data-genre="humor"
+  data-subgenre="satire"
+  data-pages="224"
+  data-keywords="adventure, Mississippi River, humor, satire, travel, American literature, river, Mark Twain, Mississippi, river adventure, comedy, American fiction, frontier, travel literature, Southern literature, social commentary, Mark Twain humor, historical America"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GQBBLYNR" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Mississippi Scheme</a>
   </div>
   <div class="cell">Mark Twain</div>
   <div class="cell">1883</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Humor</div>
 </div>
+
+
+<!-- 45 - The Old Man and the Sea -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="sea, survival, old age, fishing, courage, perseverance, loneliness, nature, struggle, human spirit"
+  data-genre="historical-fiction"
+  data-subgenre="literary-fiction"
+  data-pages="128"
+  data-keywords="sea, survival, old age, fishing, courage, perseverance, loneliness, nature, struggle, human spirit, endurance, determination, aging, masculinity, hardship, resilience, dignity, man versus nature, fishing, Cuba, literary fiction, classic literature, Ernest Hemingway"
 >
   <div class="cell">
     <a href="https://amzn.to/4gXodDD" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Old Man and the Sea</a>
   </div>
   <div class="cell">Ernest Hemingway</div>
   <div class="cell">1952</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Historical Fiction</div>
 </div>
+
+
+<!-- 46 - The Poppy War -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="fantasy, war, magic, China, revolution, mythology, gods, military, power, trauma"
+  data-genre="fantasy"
+  data-subgenre="grimdark-fantasy"
+  data-pages="544"
+  data-keywords="fantasy, war, magic, China, revolution, mythology, gods, military, power, trauma, grimdark fantasy, dark fantasy, empire, warfare, rebellion, politics, violence, shamanism, historical inspiration, Chinese history, military fantasy, revenge, genocide"
 >
   <div class="cell">
     <a href="https://amzn.to/4x6E09n" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Poppy War</a>
   </div>
   <div class="cell">R. F. Kuang</div>
   <div class="cell">2018</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 47 - The Power of Now -->
 
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="presence, consciousness, ego, enlightenment, spirituality, mindfulness, inner peace, awareness, suffering, awakening"
+  data-subgenre="mindfulness"
+  data-pages="236"
+  data-keywords="presence, consciousness, ego, enlightenment, spirituality, mindfulness, inner peace, awareness, suffering, awakening, present moment, living in the now, meditation, spiritual awakening, self awareness, anxiety, consciousness, acceptance, emotional healing, Eckhart Tolle"
 >
   <div class="cell">
     <a href="https://amzn.to/4xKJ5oS" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Power of Now</a>
@@ -706,10 +1059,15 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 48 - The Power of Positive Thinking -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="positive thinking, success, confidence, faith, optimism, motivation, self improvement, mindset, happiness"
+  data-subgenre="positive-thinking"
+  data-pages="336"
+  data-keywords="positive thinking, success, confidence, faith, optimism, motivation, self improvement, mindset, happiness, positive psychology, success mindset, overcoming fear, prayer, goal setting, personal development, mental attitude, belief, resilience, Norman Vincent Peale"
 >
   <div class="cell">
     <a href="https://amzn.to/4iPUsHi" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Power of Positive Thinking</a>
@@ -719,10 +1077,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 49 - The Power of the Subconscious Mind -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="subconscious mind, psychology, success, beliefs, thoughts, habits, mind power, self improvement, positive thinking"
+  data-subgenre="subconscious-mind"
+  data-pages="288"
+  data-keywords="subconscious mind, psychology, success, beliefs, thoughts, habits, mind power, self improvement, positive thinking, subconscious, unconscious mind, mental programming, visualization, affirmations, imagination, confidence, prosperity, healing, behavior, thought patterns, personal development, Joseph Murphy"
 >
   <div class="cell">
     <a href="https://amzn.to/4A0efdo" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Power of the Subconscious Mind</a>
@@ -732,10 +1095,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 50 - The Practice of the Presence of God -->
+
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="Christianity, prayer, God, presence of God, devotion, faith, spiritual life, worship, brother Lawrence"
+  data-subgenre="christian-prayer"
+  data-pages="128"
+  data-keywords="Christianity, prayer, God, presence of God, devotion, faith, spiritual life, worship, Brother Lawrence, prayer practice, Christian meditation, spiritual discipline, contemplation, quiet time, intimacy with God, daily prayer, Christian spirituality, God's presence"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0GNSXTCY7" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Practice of the Presence of God</a>
@@ -745,10 +1113,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 51 - The Psychology of Money -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="money, wealth, finance, investing, behavior, psychology, saving, spending, financial success, personal finance"
+  data-subgenre="financial-psychology"
+  data-pages="256"
+  data-keywords="money, wealth, finance, investing, behavior, psychology, saving, spending, financial success, personal finance, financial psychology, money mindset, wealth building, investing behavior, spending habits, saving money, financial decisions, risk, greed, happiness, financial independence, behavioral finance, Morgan Housel"
 >
   <div class="cell">
     <a href="https://amzn.to/46eBnXZ" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Psychology of Money</a>
@@ -758,10 +1131,15 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 52 - The Republic -->
+
 <div
   class="row book-item"
   data-genre="philosophy"
-  data-keywords="philosophy, justice, government, politics, ideal state, morality, ethics, democracy, truth, Plato"
+  data-subgenre="political-philosophy"
+  data-pages="416"
+  data-keywords="philosophy, justice, government, politics, ideal state, morality, ethics, democracy, truth, Plato, political philosophy, society, philosopher king, education, virtue, ideal society, political theory, human nature, wisdom, knowledge, ancient Greece"
 >
   <div class="cell">
     <a href="https://amzn.to/4A0D1dp" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Republic</a>
@@ -771,10 +1149,15 @@
   <div class="cell genre">Philosophy</div>
 </div>
 
+
+<!-- 53 - The Richest Man in Babylon -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="wealth, money, success, financial independence, saving, investing, prosperity, personal finance, discipline"
+  data-subgenre="financial-psychology"
+  data-pages="160"
+  data-keywords="wealth, money, success, financial independence, saving, investing, prosperity, personal finance, discipline, wealth building, money management, financial habits, saving money, budgeting, financial freedom, financial success, spending, debt, passive income, wealth mindset"
 >
   <div class="cell">
     <a href="https://amzn.to/469c7Cs" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Richest Man in Babylon</a>
@@ -784,88 +1167,123 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 54 - The Righteous Mind -->
+
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="morality, psychology, religion, politics, intuition, ethics, human nature, judgment, social behavior"
+  data-subgenre="moral-psychology"
+  data-pages="528"
+  data-keywords="morality, moral psychology, human nature, ethics, politics, political psychology, religion, beliefs, values, liberalism, conservatism, cooperation, social behavior, culture, intuition, reasoning, human behavior, disagreement, political division, moral judgment, society, tribalism, ideology, empathy, conflict, understanding"
 >
   <div class="cell">
     <a href="https://amzn.to/4gFYu3F" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Righteous Mind</a>
   </div>
   <div class="cell">Jonathan Haidt</div>
-  <div class="cell">2012</div>
+  <div class="cell">2013</div>
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 55 - The Stand -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="horror, apocalypse, survival, good versus evil, Stephen King, plague, society, dystopia, supernatural"
+  data-genre="horror"
+  data-subgenre="apocalyptic-horror"
+  data-pages="1153"
+  data-keywords="horror, apocalypse, survival, good versus evil, Stephen King, plague, society, dystopia, supernatural, pandemic, disease, post apocalyptic, end of the world, evil, supernatural horror, survival horror, dark fantasy, friendship, fear, violence, civilization, morality"
 >
   <div class="cell">
     <a href="https://amzn.to/4qZHs4a" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Stand</a>
   </div>
   <div class="cell">Stephen King</div>
   <div class="cell">1978</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Horror</div>
 </div>
+
+
+<!-- 56 - The Stepford Wives -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="satire, marriage, suburbia, gender roles, conformity, society, horror, mystery"
+  data-genre="horror"
+  data-subgenre="psychological-horror"
+  data-pages="160"
+  data-keywords="satire, marriage, suburbia, gender roles, conformity, society, horror, mystery, psychological horror, suburban horror, feminism, manipulation, identity, technology, control, social pressure, domestic life, paranoia, Ira Levin"
 >
   <div class="cell">
     <a href="https://amzn.to/4gGYjoY" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Stepford Wives</a>
   </div>
   <div class="cell">Ira Levin</div>
   <div class="cell">1972</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Horror</div>
 </div>
+
+
+<!-- 57 - The Sweetest Oblivion -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="romance, mafia, forbidden love, obsession, crime, family, wealth, relationships"
+  data-genre="romance"
+  data-subgenre="mafia-romance"
+  data-pages="352"
+  data-keywords="romance, mafia, forbidden love, obsession, crime, family, wealth, relationships, mafia romance, forbidden romance, enemies, attraction, family business, organized crime, wealthy family, possessive romance, passion, dangerous relationship, Italian mafia, contemporary romance"
 >
   <div class="cell">
     <a href="https://amzn.to/4gRgQ0C" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Sweetest Oblivion</a>
   </div>
   <div class="cell">Danielle Lori</div>
   <div class="cell">2018</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Romance</div>
 </div>
+
+
+<!-- 58 - The Talented Mr. Ripley -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="psychological thriller, crime, identity, deception, murder, obsession, suspense, mystery, Italy"
+  data-genre="thriller"
+  data-subgenre="psychological-thriller"
+  data-pages="288"
+  data-keywords="psychological thriller, crime, identity, deception, murder, obsession, suspense, mystery, Italy, con artist, fraud, manipulation, identity theft, wealthy people, ambition, crime fiction, psychological suspense, murder mystery, sociopath, Tom Ripley, Patricia Highsmith"
 >
   <div class="cell">
     <a href="https://amzn.to/4dltkMM" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Talented Mr. Ripley</a>
   </div>
   <div class="cell">Patricia Highsmith</div>
   <div class="cell">1955</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Thriller</div>
 </div>
+
+
+<!-- 59 - The Violent Bear It Away -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="southern gothic, religion, faith, evil, grace, sin, redemption, morality, violence"
+  data-genre="historical-fiction"
+  data-subgenre="southern-gothic"
+  data-pages="272"
+  data-keywords="southern gothic, religion, faith, evil, grace, sin, redemption, morality, violence, Christianity, spiritual conflict, prophecy, religious fiction, American literature, Southern literature, family, adolescence, faith and doubt, good and evil, salvation, sin, grace, Flannery O'Connor"
 >
   <div class="cell">
     <a href="https://amzn.to/4ymNRZx" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Violent Bear It Away</a>
   </div>
   <div class="cell">Flannery O'Connor</div>
   <div class="cell">1960</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Historical Fiction</div>
 </div>
+
+
+<!-- 60 - The Warfare of the Soul -->
 
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="spiritual warfare, Christian life, soul, faith, temptation, prayer, spiritual battle, God, holiness"
+  data-subgenre="christian-spiritual-warfare"
+  data-pages="176"
+  data-keywords="spiritual warfare, Christian life, soul, faith, temptation, prayer, spiritual battle, God, holiness, Christian spirituality, spiritual growth, sin, sanctification, inner life, Christian discipline, devotion, spiritual struggle"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0H6CHWHZ7" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Warfare of the Soul</a>
@@ -875,10 +1293,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 61 - The Way of Peace -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="peace, spirituality, Christianity, inner peace, God, faith, meditation, prayer, calm, spiritual growth"
+  data-subgenre="inner-peace"
+  data-pages="128"
+  data-keywords="peace, spirituality, Christianity, inner peace, God, faith, meditation, prayer, calm, spiritual growth, tranquility, mindfulness, spiritual wisdom, self discipline, thoughts, inner life, serenity, Christian spirituality, peace of mind, James Allen"
 >
   <div class="cell">
     <a href="https://www.amazon.com/dp/B0G3WPRLR7" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Way of Peace</a>
@@ -888,23 +1311,33 @@
   <div class="cell genre">Spirituality</div>
 </div>
 
+
+<!-- 62 - The Will of the Many -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="fantasy, politics, power, magic, succession, war, prophecy, empire, strategy, adventure"
+  data-genre="fantasy"
+  data-subgenre="epic-fantasy"
+  data-pages="600"
+  data-keywords="fantasy, politics, power, magic, succession, war, prophecy, empire, strategy, adventure, epic fantasy, military fantasy, political fantasy, magic system, rebellion, academy, hierarchy, leadership, James Islington"
 >
   <div class="cell">
     <a href="https://amzn.to/4A0ud7m" class="book-link" target="_blank" rel="nofollow sponsored noopener">The Will of the Many</a>
   </div>
   <div class="cell">James Islington</div>
   <div class="cell">2023</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 63 - Thinking, Fast and Slow -->
 
 <div
   class="row book-item"
   data-genre="psychology"
-  data-keywords="thinking, decision making, cognitive biases, psychology, judgment, intuition, rationality, behavior, human mind"
+  data-subgenre="cognitive-psychology"
+  data-pages="512"
+  data-keywords="thinking, decision making, cognitive biases, psychology, judgment, intuition, rationality, behavior, human mind, cognitive psychology, behavioral economics, fast thinking, slow thinking, System 1, System 2, biases, heuristics, probability, memory, reasoning, irrationality, human behavior, Daniel Kahneman"
 >
   <div class="cell">
     <a href="https://amzn.to/4qX7AMV" class="book-link" target="_blank" rel="nofollow sponsored noopener">Thinking, Fast and Slow</a>
@@ -914,36 +1347,51 @@
   <div class="cell genre">Psychology</div>
 </div>
 
+
+<!-- 64 - Ugly Love -->
+
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="romance, love, relationships, grief, emotional drama, obsession, heartbreak, contemporary romance"
+  data-genre="romance"
+  data-subgenre="contemporary-romance"
+  data-pages="336"
+  data-keywords="romance, love, relationships, grief, emotional drama, obsession, heartbreak, contemporary romance, emotional romance, loss, trauma, attraction, complicated relationships, friendship, intimacy, love story, emotional healing, romantic drama, Colleen Hoover"
 >
   <div class="cell">
     <a href="https://amzn.to/4iPUZZO" class="book-link" target="_blank" rel="nofollow sponsored noopener">Ugly Love</a>
   </div>
   <div class="cell">Colleen Hoover</div>
   <div class="cell">2014</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Romance</div>
 </div>
+
+
+<!-- 65 - Watership Down -->
 
 <div
   class="row book-item"
-  data-genre="fiction"
-  data-keywords="adventure, animals, rabbits, survival, nature, friendship, leadership, freedom, courage"
+  data-genre="fantasy"
+  data-subgenre="animal-fantasy"
+  data-pages="476"
+  data-keywords="adventure, animals, rabbits, survival, nature, friendship, leadership, freedom, courage, fantasy, animal fantasy, wildlife, society, community, mythology, folklore, Richard Adams"
 >
   <div class="cell">
     <a href="https://amzn.to/4qUGsOA" class="book-link" target="_blank" rel="nofollow sponsored noopener">Watership Down</a>
   </div>
   <div class="cell">Richard Adams</div>
   <div class="cell">1972</div>
-  <div class="cell genre">Fiction</div>
+  <div class="cell genre">Fantasy</div>
 </div>
+
+
+<!-- 66 - Winning the War in Your Mind -->
 
 <div
   class="row book-item"
   data-genre="religion"
-  data-keywords="mind, spiritual warfare, Christianity, thoughts, temptation, faith, victory, prayer, renewing the mind, God"
+  data-subgenre="christian-personal-growth"
+  data-pages="224"
+  data-keywords="mind, spiritual warfare, Christianity, thoughts, temptation, faith, victory, prayer, renewing the mind, God, negative thoughts, mental battles, Christian mindset, spiritual growth, anxiety, worry, fear, biblical thinking, thought patterns, overcoming negative thoughts, Christian life, Craig Groeschel"
 >
   <div class="cell">
     <a href="https://amzn.to/4A0bWqD" class="book-link" target="_blank" rel="nofollow sponsored noopener">Winning the War in Your Mind</a>
@@ -953,10 +1401,15 @@
   <div class="cell genre">Religion</div>
 </div>
 
+
+<!-- 67 - Within You Is the Power -->
+
 <div
   class="row book-item"
   data-genre="spirituality"
-  data-keywords="mind power, subconscious, spirituality, positive thinking, consciousness, inner power, success, self improvement, personal growth"
+  data-subgenre="mind-power"
+  data-pages="224"
+  data-keywords="mind power, subconscious, spirituality, positive thinking, consciousness, inner power, success, self improvement, personal growth, subconscious mind, mental power, thought power, visualization, beliefs, affirmations, personal development, confidence, spiritual growth, mind body connection, Henry Thomas Hamblin"
 >
   <div class="cell">
     <a href="https://amzn.to/4qU8Hgg" class="book-link" target="_blank" rel="nofollow sponsored noopener">Within You Is the Power</a>
@@ -967,38 +1420,136 @@
 </div>
 
 
-
 </div>
+
+
+<!-- ================================
+     BOOK FINDER
+     STEP 3: FILTER JAVASCRIPT
+     KEEP THIS SCRIPT AT THE BOTTOM
+     ================================ -->
 
 <script>
 
-const searchInput = document.getElementById("searchInput");
+const searchInput =
+  document.getElementById("searchInput");
 
-const books = document.querySelectorAll(".book-item");
+const books =
+  document.querySelectorAll(".book-item");
 
-const filterButtons = document.querySelectorAll(".filter-btn");
+const filterButtons =
+  document.querySelectorAll(".filter-btn");
 
-const noResults = document.getElementById("noResults");
+const noResults =
+  document.getElementById("noResults");
+
+const minPagesSlider =
+  document.getElementById("min-pages");
+
+const maxPagesSlider =
+  document.getElementById("max-pages");
+
+const pageRangeDisplay =
+  document.getElementById("page-range-display");
+
 
 let currentGenre = "all";
 
+let minPages = 50;
+
+let maxPages = 1000;
+
+
+/* ================================
+   UPDATE PAGE RANGE
+   ================================ */
+
+function updatePageRange() {
+
+  minPages =
+    parseInt(minPagesSlider.value);
+
+  maxPages =
+    parseInt(maxPagesSlider.value);
+
+
+  /* Prevent sliders from crossing */
+
+  if (minPages > maxPages) {
+
+    if (
+      document.activeElement === minPagesSlider
+    ) {
+
+      minPagesSlider.value =
+        maxPages;
+
+      minPages =
+        maxPages;
+
+    } else {
+
+      maxPagesSlider.value =
+        minPages;
+
+      maxPages =
+        minPages;
+
+    }
+
+  }
+
+
+  const minText =
+    minPages.toLocaleString();
+
+
+  const maxText =
+    maxPages >= 1000
+      ? "1,000+"
+      : maxPages.toLocaleString();
+
+
+  pageRangeDisplay.textContent =
+    minText + " - " + maxText;
+
+
+  updateBooks();
+
+}
+
+
+/* ================================
+   UPDATE BOOKS
+   SEARCH + GENRE + PAGE COUNT
+   ================================ */
 
 function updateBooks() {
 
   const searchValue =
-    searchInput.value.toLowerCase().trim();
+    searchInput.value
+      .toLowerCase()
+      .trim();
+
 
   let visibleBooks = 0;
 
 
   books.forEach(book => {
 
+
+    /* SEARCH */
+
     const text =
       book.innerText.toLowerCase();
 
+
     const keywords =
-      (book.getAttribute("data-keywords") || "")
-      .toLowerCase();
+      (
+        book.getAttribute("data-keywords")
+        || ""
+      ).toLowerCase();
+
 
     const searchableText =
       text + " " + keywords;
@@ -1008,12 +1559,38 @@ function updateBooks() {
       searchableText.includes(searchValue);
 
 
+    /* GENRE */
+
+    const bookGenre =
+      book.getAttribute("data-genre");
+
+
     const matchesGenre =
       currentGenre === "all" ||
-      book.getAttribute("data-genre") === currentGenre;
+      bookGenre === currentGenre;
 
 
-    if (matchesSearch && matchesGenre) {
+    /* PAGE COUNT */
+
+    const bookPages =
+      parseInt(
+        book.getAttribute("data-pages")
+      );
+
+
+    const matchesPages =
+      !isNaN(bookPages) &&
+      bookPages >= minPages &&
+      bookPages <= maxPages;
+
+
+    /* FINAL FILTER */
+
+    if (
+      matchesSearch &&
+      matchesGenre &&
+      matchesPages
+    ) {
 
       book.style.display = "grid";
 
@@ -1028,6 +1605,8 @@ function updateBooks() {
   });
 
 
+  /* NO RESULTS */
+
   if (visibleBooks === 0) {
 
     noResults.style.display = "block";
@@ -1041,38 +1620,77 @@ function updateBooks() {
 }
 
 
-searchInput.addEventListener("input", function() {
+/* ================================
+   SEARCH
+   ================================ */
 
-  updateBooks();
+searchInput.addEventListener(
+  "input",
+  updateBooks
+);
 
-});
 
+/* ================================
+   GENRE BUTTONS
+   ================================ */
 
 filterButtons.forEach(button => {
 
-  button.addEventListener("click", function() {
-
-    filterButtons.forEach(btn => {
-
-      btn.classList.remove("active");
-
-    });
+  button.addEventListener(
+    "click",
+    function() {
 
 
-    this.classList.add("active");
+      filterButtons.forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
 
 
-    currentGenre =
-      this.getAttribute("data-genre");
+      this.classList.add("active");
 
 
-    updateBooks();
+      currentGenre =
+        this.getAttribute("data-genre");
 
-  });
+
+      updateBooks();
+
+    }
+  );
 
 });
 
+
+/* ================================
+   PAGE SLIDERS
+   ================================ */
+
+minPagesSlider.addEventListener(
+  "input",
+  updatePageRange
+);
+
+
+maxPagesSlider.addEventListener(
+  "input",
+  updatePageRange
+);
+
+
+/* ================================
+   INITIALIZE
+   ================================ */
+
+updatePageRange();
+
 </script>
+
+
+<!-- ================================
+     FOOTER
+     ================================ -->
 
 <footer class="site-footer">
 
@@ -1087,9 +1705,15 @@ filterButtons.forEach(button => {
     </p>
 
     <nav class="footer-links">
-      <a href="https://pandapages.org/" target="_blank" rel="noopener">
+
+      <a
+        href="https://pandapages.org/"
+        target="_blank"
+        rel="noopener"
+      >
         Book Collection
       </a>
+
     </nav>
 
     <p class="amazon-disclosure">
@@ -1103,6 +1727,9 @@ filterButtons.forEach(button => {
   </div>
 
 </footer>
+
+
+</div>
 
 </body>
 
