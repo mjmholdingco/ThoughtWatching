@@ -2083,7 +2083,7 @@ let booksToShow = 100;
 
 
 /* ================================
-   BOOK COLLECTION
+   INITIAL BOOKS
    ================================ */
 
 /*
@@ -2099,9 +2099,13 @@ let initialBooks =
   );
 
 
+/* ================================
+   STORAGE BOOKS
+   ================================ */
+
 /*
-   These are the books stored inside
-   books.html.
+   These are the books contained
+   inside books.html.
 */
 
 let additionalBooks = [];
@@ -2128,22 +2132,36 @@ let maxPages = 1000;
 
 async function loadAdditionalBooks() {
 
+  /*
+     If books.html has already been
+     loaded, do nothing.
+  */
+
   if (additionalBooksLoaded) {
     return true;
   }
 
+
+  /*
+     If another request is already
+     loading books.html, wait for it.
+  */
+
   if (storageLoadPromise) {
     return storageLoadPromise;
   }
+
 
   storageLoadPromise =
     fetch("books.html")
       .then(response => {
 
         if (!response.ok) {
+
           throw new Error(
             "Could not load books.html"
           );
+
         }
 
         return response.text();
@@ -2154,11 +2172,13 @@ async function loadAdditionalBooks() {
         const parser =
           new DOMParser();
 
+
         const storageDocument =
           parser.parseFromString(
             html,
             "text/html"
           );
+
 
         additionalBooks =
           Array.from(
@@ -2167,7 +2187,10 @@ async function loadAdditionalBooks() {
             )
           );
 
-        additionalBooksLoaded = true;
+
+        additionalBooksLoaded =
+          true;
+
 
         return true;
 
@@ -2179,11 +2202,15 @@ async function loadAdditionalBooks() {
           error
         );
 
-        storageLoadPromise = null;
+
+        storageLoadPromise =
+          null;
+
 
         return false;
 
       });
+
 
   return storageLoadPromise;
 
@@ -2207,27 +2234,10 @@ function getAllBooks() {
 
   }
 
+
   return [
     ...initialBooks
   ];
-
-}
-
-
-/* ================================
-   LOAD ENTIRE COLLECTION
-   ================================ */
-
-async function loadAllBooksIntoMemory() {
-
-  const loaded =
-    await loadAdditionalBooks();
-
-  if (!loaded) {
-    return false;
-  }
-
-  return true;
 
 }
 
@@ -2243,11 +2253,17 @@ function updatePageRangeDisplay() {
       minPagesSlider.value
     );
 
+
   maxPages =
     parseInt(
       maxPagesSlider.value
     );
 
+
+  /*
+     Prevent minimum from going
+     above maximum.
+  */
 
   if (
     minPages > maxPages
@@ -2279,6 +2295,7 @@ function updatePageRangeDisplay() {
 
   const minText =
     minPages.toLocaleString();
+
 
   const maxText =
     maxPages >= 1000
@@ -2313,10 +2330,18 @@ function getMatchingBooks() {
   return allBooks.filter(
     book => {
 
+      /*
+         Visible book text.
+      */
+
       const text =
         book.innerText
           .toLowerCase();
 
+
+      /*
+         Hidden searchable keywords.
+      */
 
       const keywords =
         (
@@ -2333,11 +2358,19 @@ function getMatchingBooks() {
         keywords;
 
 
+      /*
+         Search filter.
+      */
+
       const matchesSearch =
         searchableText.includes(
           searchValue
         );
 
+
+      /*
+         Genre filter.
+      */
 
       const bookGenre =
         book.getAttribute(
@@ -2349,6 +2382,10 @@ function getMatchingBooks() {
         currentGenre === "all" ||
         bookGenre === currentGenre;
 
+
+      /*
+         Page filter.
+      */
 
       const bookPages =
         parseInt(
@@ -2394,7 +2431,7 @@ function updateBooks() {
 
 
   /*
-     Hide every book first.
+     Hide all books first.
   */
 
   allBooks.forEach(
@@ -2408,8 +2445,8 @@ function updateBooks() {
 
 
   /*
-     Show only the number
-     currently allowed.
+     Determine which matching
+     books should currently show.
   */
 
   const visibleBooks =
@@ -2419,18 +2456,14 @@ function updateBooks() {
     );
 
 
+  /*
+     Add storage books to the page
+     only when they actually need
+     to be displayed.
+  */
+
   visibleBooks.forEach(
     book => {
-
-      /*
-         Books already in index.html
-         are normally already attached
-         to the page.
-
-         Books from books.html need to
-         be attached when they become
-         visible.
-      */
 
       if (
         !bookList.contains(book)
@@ -2451,7 +2484,7 @@ function updateBooks() {
 
 
   /*
-     No-results message.
+     No results message.
   */
 
   if (
@@ -2470,9 +2503,8 @@ function updateBooks() {
 
 
   /*
-     Determine whether there are
-     still matching books that have
-     not been displayed.
+     There are more matching books
+     already available in memory.
   */
 
   const moreBooksAvailable =
@@ -2480,8 +2512,22 @@ function updateBooks() {
     booksToShow;
 
 
+  /*
+     When the page first opens,
+     books.html has not been loaded.
+
+     Keep Load More visible because
+     additional books are waiting
+     inside books.html.
+  */
+
+  const storageNotLoaded =
+    !additionalBooksLoaded;
+
+
   if (
-    moreBooksAvailable
+    moreBooksAvailable ||
+    storageNotLoaded
   ) {
 
     loadMoreContainer.style.display =
@@ -2501,18 +2547,19 @@ function updateBooks() {
 
 
 /* ================================
-   RESET DISPLAY
+   RESET FILTERED RESULTS
    ================================ */
 
 function resetAndUpdate() {
 
   /*
-     Every new filter/search starts
+     Every new search/filter starts
      at the first 100 matching books.
   */
 
   booksToShow =
     booksPerLoad;
+
 
   updateBooks();
 
@@ -2528,12 +2575,11 @@ searchInput.addEventListener(
   async function() {
 
     /*
-       Searching needs the complete
-       collection available.
+       Search the complete collection.
     */
 
     const loaded =
-      await loadAllBooksIntoMemory();
+      await loadAdditionalBooks();
 
 
     if (!loaded) {
@@ -2548,7 +2594,7 @@ searchInput.addEventListener(
 
 
 /* ================================
-   GENRE BUTTONS
+   GENRE FILTERS
    ================================ */
 
 filterButtons.forEach(
@@ -2557,6 +2603,10 @@ filterButtons.forEach(
     button.addEventListener(
       "click",
       async function() {
+
+        /*
+           Update active button.
+        */
 
         filterButtons.forEach(
           btn => {
@@ -2574,6 +2624,10 @@ filterButtons.forEach(
         );
 
 
+        /*
+           Set selected genre.
+        */
+
         currentGenre =
           this.getAttribute(
             "data-genre"
@@ -2581,12 +2635,13 @@ filterButtons.forEach(
 
 
         /*
-           Genre filtering needs the
-           complete collection available.
+           Load the complete collection
+           so books inside books.html
+           can be found by the filter.
         */
 
         const loaded =
-          await loadAllBooksIntoMemory();
+          await loadAdditionalBooks();
 
 
         if (!loaded) {
@@ -2604,7 +2659,7 @@ filterButtons.forEach(
 
 
 /* ================================
-   MIN PAGE SLIDER
+   MINIMUM PAGE FILTER
    ================================ */
 
 minPagesSlider.addEventListener(
@@ -2615,12 +2670,13 @@ minPagesSlider.addEventListener(
 
 
     /*
-       Page filtering searches the
-       complete collection.
+       Load the complete collection
+       so page filtering includes
+       books in books.html.
     */
 
     const loaded =
-      await loadAllBooksIntoMemory();
+      await loadAdditionalBooks();
 
 
     if (!loaded) {
@@ -2635,7 +2691,7 @@ minPagesSlider.addEventListener(
 
 
 /* ================================
-   MAX PAGE SLIDER
+   MAXIMUM PAGE FILTER
    ================================ */
 
 maxPagesSlider.addEventListener(
@@ -2646,12 +2702,13 @@ maxPagesSlider.addEventListener(
 
 
     /*
-       Page filtering searches the
-       complete collection.
+       Load the complete collection
+       so page filtering includes
+       books in books.html.
     */
 
     const loaded =
-      await loadAllBooksIntoMemory();
+      await loadAdditionalBooks();
 
 
     if (!loaded) {
@@ -2666,24 +2723,29 @@ maxPagesSlider.addEventListener(
 
 
 /* ================================
-   LOAD MORE
+   LOAD MORE BUTTON
    ================================ */
 
 loadMoreBtn.addEventListener(
   "click",
   async function() {
 
+    /*
+       Prevent double-clicking while
+       books.html is loading.
+    */
+
     loadMoreBtn.disabled =
       true;
 
 
     /*
-       Make sure the complete
-       collection is available.
+       Load the storage collection
+       if it hasn't been loaded yet.
     */
 
     const loaded =
-      await loadAllBooksIntoMemory();
+      await loadAdditionalBooks();
 
 
     if (!loaded) {
@@ -2699,15 +2761,23 @@ loadMoreBtn.addEventListener(
     /*
        Increase the number of
        matching books displayed
-       by exactly 100.
+       by 100.
     */
 
     booksToShow +=
       booksPerLoad;
 
 
+    /*
+       Update the display.
+    */
+
     updateBooks();
 
+
+    /*
+       Allow another click.
+    */
 
     loadMoreBtn.disabled =
       false;
@@ -2717,7 +2787,7 @@ loadMoreBtn.addEventListener(
 
 
 /* ================================
-   INITIALIZE
+   INITIALIZE PAGE
    ================================ */
 
 updatePageRangeDisplay();
