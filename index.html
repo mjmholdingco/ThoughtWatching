@@ -2097,6 +2097,8 @@ let additionalBooksLoaded = false;
 
 let additionalBooksShown = 0;
 
+let storageLoadPromise = null;
+
 
 /* ================================
    CURRENT FILTERS
@@ -2110,100 +2112,69 @@ let maxPages = 1000;
 
 
 /* ================================
-   SORT BOOKS
-   ================================ */
-
-function sortBooks(bookArray) {
-
-  bookArray.sort((a, b) => {
-
-    const titleA =
-      a.querySelector(".book-link")
-        .textContent
-        .trim();
-
-    const titleB =
-      b.querySelector(".book-link")
-        .textContent
-        .trim();
-
-    return titleA.localeCompare(
-      titleB,
-      undefined,
-      {
-        sensitivity: "base",
-        numeric: true
-      }
-    );
-
-  });
-
-}
-
-
-/* ================================
-   INITIAL SORT
-   ================================ */
-
-sortBooks(books);
-
-books.forEach(book => {
-  bookList.appendChild(book);
-});
-
-
-/* ================================
    LOAD BOOKS FROM STORAGE
    ================================ */
 
 async function loadAdditionalBooks() {
 
   if (additionalBooksLoaded) {
-    return;
+    return true;
   }
 
-  try {
-
-    const response =
-      await fetch("books.html");
-
-    if (!response.ok) {
-      throw new Error(
-        "Could not load books.html"
-      );
-    }
-
-    const html =
-      await response.text();
-
-    const parser =
-      new DOMParser();
-
-    const documentFromStorage =
-      parser.parseFromString(
-        html,
-        "text/html"
-      );
-
-    additionalBooks =
-      Array.from(
-        documentFromStorage.querySelectorAll(
-          ".book-item"
-        )
-      );
-
-    sortBooks(additionalBooks);
-
-    additionalBooksLoaded = true;
-
-  } catch (error) {
-
-    console.error(
-      "Error loading books.html:",
-      error
-    );
-
+  if (storageLoadPromise) {
+    return storageLoadPromise;
   }
+
+  storageLoadPromise =
+    fetch("books.html")
+      .then(response => {
+
+        if (!response.ok) {
+          throw new Error(
+            "Could not load books.html"
+          );
+        }
+
+        return response.text();
+
+      })
+      .then(html => {
+
+        const parser =
+          new DOMParser();
+
+        const documentFromStorage =
+          parser.parseFromString(
+            html,
+            "text/html"
+          );
+
+        additionalBooks =
+          Array.from(
+            documentFromStorage.querySelectorAll(
+              ".book-item"
+            )
+          );
+
+        additionalBooksLoaded = true;
+
+        return true;
+
+      })
+      .catch(error => {
+
+        console.error(
+          "Error loading books.html:",
+          error
+        );
+
+        storageLoadPromise = null;
+
+        return false;
+
+      });
+
+  return storageLoadPromise;
 
 }
 
@@ -2214,7 +2185,12 @@ async function loadAdditionalBooks() {
 
 async function loadAllBooks() {
 
-  await loadAdditionalBooks();
+  const loaded =
+    await loadAdditionalBooks();
+
+  if (!loaded) {
+    return false;
+  }
 
   additionalBooks.forEach(book => {
 
@@ -2228,30 +2204,26 @@ async function loadAllBooks() {
 
   });
 
+  additionalBooksShown =
+    additionalBooks.length;
+
   books =
     Array.from(
-      document.querySelectorAll(
+      bookList.querySelectorAll(
         ".book-item"
       )
     );
 
-  sortBooks(books);
-
-  books.forEach(book => {
-    bookList.appendChild(book);
-  });
-
-  additionalBooksShown =
-    additionalBooks.length;
+  return true;
 
 }
 
 
 /* ================================
-   UPDATE PAGE RANGE
+   PAGE RANGE DISPLAY
    ================================ */
 
-async function updatePageRange() {
+function updatePageRangeDisplay() {
 
   minPages =
     parseInt(
@@ -2299,13 +2271,6 @@ async function updatePageRange() {
   pageRangeDisplay.textContent =
     minText + " - " + maxText;
 
-  booksToShow =
-    booksPerLoad;
-
-  await loadAllBooks();
-
-  updateBooks();
-
 }
 
 
@@ -2321,6 +2286,7 @@ function updateBooks() {
       .trim();
 
   let matchingBooks = [];
+
 
   books.forEach(book => {
 
@@ -2368,6 +2334,7 @@ function updateBooks() {
         bookPages <= maxPages
       );
 
+
     if (
       matchesSearch &&
       matchesGenre &&
@@ -2382,7 +2349,10 @@ function updateBooks() {
 
 
   books.forEach(book => {
-    book.style.display = "none";
+
+    book.style.display =
+      "none";
+
   });
 
 
@@ -2394,12 +2364,22 @@ function updateBooks() {
 
 
   visibleBooks.forEach(book => {
-    book.style.display = "grid";
+
+    book.style.display =
+      "grid";
+
   });
 
 
+  /*
+     Only show "No books found"
+     when the entire collection
+     has been loaded.
+  */
+
   if (
-    matchingBooks.length === 0
+    matchingBooks.length === 0 &&
+    additionalBooksLoaded
   ) {
 
     noResults.style.display =
@@ -2413,39 +2393,84 @@ function updateBooks() {
   }
 
 
- if (
-  matchingBooks.length >
-  booksToShow ||
-  !additionalBooksLoaded
-) {
+  /*
+     Determine whether there are
+     more books available.
 
-  loadMoreContainer.style.display =
-    "flex";
+     There can be more books in
+     two different places:
 
-  if (additionalBooksLoaded) {
+     1. Already loaded onto the page
+     2. Still waiting inside books.html
+  */
 
-    const remaining =
-      matchingBooks.length -
-      booksToShow;
+  const moreLoadedBooks =
+    matchingBooks.length >
+    booksToShow;
 
-    loadMoreBtn.textContent =
-      "Load More (" +
-      Math.max(remaining, 0).toLocaleString() +
-      " remaining)";
+  const moreStorageBooks =
+    additionalBooksLoaded &&
+    additionalBooksShown <
+    additionalBooks.length;
+
+  const storageNotLoaded =
+    !additionalBooksLoaded;
+
+
+  if (
+    moreLoadedBooks ||
+    moreStorageBooks ||
+    storageNotLoaded
+  ) {
+
+    loadMoreContainer.style.display =
+      "flex";
+
+
+    if (
+      additionalBooksLoaded
+    ) {
+
+      const remainingStorageBooks =
+        additionalBooks.length -
+        additionalBooksShown;
+
+
+      if (
+        moreLoadedBooks
+      ) {
+
+        const remainingMatches =
+          matchingBooks.length -
+          booksToShow;
+
+        loadMoreBtn.textContent =
+          "Load More (" +
+          remainingMatches.toLocaleString() +
+          " remaining)";
+
+      } else if (
+        remainingStorageBooks > 0
+      ) {
+
+        loadMoreBtn.textContent =
+          "Load More";
+
+      }
+
+    } else {
+
+      loadMoreBtn.textContent =
+        "Load More";
+
+    }
 
   } else {
 
-    loadMoreBtn.textContent =
-      "Load More";
+    loadMoreContainer.style.display =
+      "none";
 
   }
-
-} else {
-
-  loadMoreContainer.style.display =
-    "none";
-
-}
 
 }
 
@@ -2461,7 +2486,22 @@ searchInput.addEventListener(
     booksToShow =
       booksPerLoad;
 
-    await loadAllBooks();
+
+    /*
+       Search needs the entire
+       collection available so that
+       books inside books.html can
+       be found.
+    */
+
+    if (
+      this.value.trim() !== ""
+    ) {
+
+      await loadAllBooks();
+
+    }
+
 
     updateBooks();
 
@@ -2491,13 +2531,21 @@ filterButtons.forEach(button => {
         "active"
       );
 
+
       currentGenre =
         this.getAttribute(
           "data-genre"
         );
 
+
       booksToShow =
         booksPerLoad;
+
+
+      /*
+         Genre filtering searches
+         the complete collection.
+      */
 
       await loadAllBooks();
 
@@ -2515,12 +2563,35 @@ filterButtons.forEach(button => {
 
 minPagesSlider.addEventListener(
   "input",
-  updatePageRange
+  async function() {
+
+    updatePageRangeDisplay();
+
+    booksToShow =
+      booksPerLoad;
+
+    await loadAllBooks();
+
+    updateBooks();
+
+  }
 );
+
 
 maxPagesSlider.addEventListener(
   "input",
-  updatePageRange
+  async function() {
+
+    updatePageRangeDisplay();
+
+    booksToShow =
+      booksPerLoad;
+
+    await loadAllBooks();
+
+    updateBooks();
+
+  }
 );
 
 
@@ -2532,7 +2603,33 @@ loadMoreBtn.addEventListener(
   "click",
   async function() {
 
-    await loadAdditionalBooks();
+    loadMoreBtn.disabled =
+      true;
+
+
+    /*
+       Load books.html if it has
+       not already been loaded.
+    */
+
+    const loaded =
+      await loadAdditionalBooks();
+
+
+    if (!loaded) {
+
+      loadMoreBtn.disabled =
+        false;
+
+      return;
+
+    }
+
+
+    /*
+       Add the next 100 books
+       from books.html.
+    */
 
     const nextBooks =
       additionalBooks.slice(
@@ -2541,32 +2638,45 @@ loadMoreBtn.addEventListener(
           booksPerLoad
       );
 
+
     nextBooks.forEach(book => {
 
       bookList.appendChild(book);
 
     });
 
+
     additionalBooksShown +=
       nextBooks.length;
 
+
+    /*
+       Update the list of books
+       currently in the page.
+    */
+
     books =
       Array.from(
-        document.querySelectorAll(
+        bookList.querySelectorAll(
           ".book-item"
         )
       );
 
-    sortBooks(books);
 
-    books.forEach(book => {
-      bookList.appendChild(book);
-    });
+    /*
+       Allow another 100 books
+       to become visible.
+    */
 
     booksToShow +=
       nextBooks.length;
 
+
     updateBooks();
+
+
+    loadMoreBtn.disabled =
+      false;
 
   }
 );
@@ -2576,10 +2686,11 @@ loadMoreBtn.addEventListener(
    INITIALIZE
    ================================ */
 
+updatePageRangeDisplay();
+
 updateBooks();
 
 </script>
-
 
 <!-- ================================
      FOOTER
