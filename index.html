@@ -2051,11 +2051,6 @@ const searchInput =
 const bookList =
   document.getElementById("bookList");
 
-let books =
-  Array.from(
-    document.querySelectorAll(".book-item")
-  );
-
 const filterButtons =
   document.querySelectorAll(".filter-btn");
 
@@ -2088,14 +2083,30 @@ let booksToShow = 100;
 
 
 /* ================================
-   STORAGE BOOKS
+   BOOK COLLECTION
    ================================ */
+
+/*
+   These are the books already
+   contained in index.html.
+*/
+
+let initialBooks =
+  Array.from(
+    document.querySelectorAll(
+      "#bookList .book-item"
+    )
+  );
+
+
+/*
+   These are the books stored inside
+   books.html.
+*/
 
 let additionalBooks = [];
 
 let additionalBooksLoaded = false;
-
-let additionalBooksShown = 0;
 
 let storageLoadPromise = null;
 
@@ -2143,7 +2154,7 @@ async function loadAdditionalBooks() {
         const parser =
           new DOMParser();
 
-        const documentFromStorage =
+        const storageDocument =
           parser.parseFromString(
             html,
             "text/html"
@@ -2151,7 +2162,7 @@ async function loadAdditionalBooks() {
 
         additionalBooks =
           Array.from(
-            documentFromStorage.querySelectorAll(
+            storageDocument.querySelectorAll(
               ".book-item"
             )
           );
@@ -2180,10 +2191,34 @@ async function loadAdditionalBooks() {
 
 
 /* ================================
-   LOAD ALL BOOKS
+   GET ALL BOOKS
    ================================ */
 
-async function loadAllBooks() {
+function getAllBooks() {
+
+  if (
+    additionalBooksLoaded
+  ) {
+
+    return [
+      ...initialBooks,
+      ...additionalBooks
+    ];
+
+  }
+
+  return [
+    ...initialBooks
+  ];
+
+}
+
+
+/* ================================
+   LOAD ENTIRE COLLECTION
+   ================================ */
+
+async function loadAllBooksIntoMemory() {
 
   const loaded =
     await loadAdditionalBooks();
@@ -2191,28 +2226,6 @@ async function loadAllBooks() {
   if (!loaded) {
     return false;
   }
-
-  additionalBooks.forEach(book => {
-
-    if (
-      !bookList.contains(book)
-    ) {
-
-      bookList.appendChild(book);
-
-    }
-
-  });
-
-  additionalBooksShown =
-    additionalBooks.length;
-
-  books =
-    Array.from(
-      bookList.querySelectorAll(
-        ".book-item"
-      )
-    );
 
   return true;
 
@@ -2235,7 +2248,10 @@ function updatePageRangeDisplay() {
       maxPagesSlider.value
     );
 
-  if (minPages > maxPages) {
+
+  if (
+    minPages > maxPages
+  ) {
 
     if (
       document.activeElement ===
@@ -2260,6 +2276,7 @@ function updatePageRangeDisplay() {
 
   }
 
+
   const minText =
     minPages.toLocaleString();
 
@@ -2268,93 +2285,132 @@ function updatePageRangeDisplay() {
       ? "1,000+"
       : maxPages.toLocaleString();
 
+
   pageRangeDisplay.textContent =
-    minText + " - " + maxText;
+    minText +
+    " - " +
+    maxText;
 
 }
 
 
 /* ================================
-   UPDATE BOOKS
+   GET MATCHING BOOKS
    ================================ */
 
-function updateBooks() {
+function getMatchingBooks() {
 
   const searchValue =
     searchInput.value
       .toLowerCase()
       .trim();
 
-  let matchingBooks = [];
+
+  const allBooks =
+    getAllBooks();
 
 
-  books.forEach(book => {
+  return allBooks.filter(
+    book => {
 
-    const text =
-      book.innerText
-        .toLowerCase();
+      const text =
+        book.innerText
+          .toLowerCase();
 
-    const keywords =
-      (
+
+      const keywords =
+        (
+          book.getAttribute(
+            "data-keywords"
+          )
+          || ""
+        ).toLowerCase();
+
+
+      const searchableText =
+        text +
+        " " +
+        keywords;
+
+
+      const matchesSearch =
+        searchableText.includes(
+          searchValue
+        );
+
+
+      const bookGenre =
         book.getAttribute(
-          "data-keywords"
-        )
-        || ""
-      ).toLowerCase();
+          "data-genre"
+        );
 
-    const searchableText =
-      text + " " + keywords;
 
-    const matchesSearch =
-      searchableText.includes(
-        searchValue
+      const matchesGenre =
+        currentGenre === "all" ||
+        bookGenre === currentGenre;
+
+
+      const bookPages =
+        parseInt(
+          book.getAttribute(
+            "data-pages"
+          )
+        );
+
+
+      const matchesPages =
+        !isNaN(bookPages) &&
+        bookPages >= minPages &&
+        (
+          maxPages === 1000 ||
+          bookPages <= maxPages
+        );
+
+
+      return (
+        matchesSearch &&
+        matchesGenre &&
+        matchesPages
       );
-
-    const bookGenre =
-      book.getAttribute(
-        "data-genre"
-      );
-
-    const matchesGenre =
-      currentGenre === "all" ||
-      bookGenre === currentGenre;
-
-    const bookPages =
-      parseInt(
-        book.getAttribute(
-          "data-pages"
-        )
-      );
-
-    const matchesPages =
-      !isNaN(bookPages) &&
-      bookPages >= minPages &&
-      (
-        maxPages === 1000 ||
-        bookPages <= maxPages
-      );
-
-
-    if (
-      matchesSearch &&
-      matchesGenre &&
-      matchesPages
-    ) {
-
-      matchingBooks.push(book);
 
     }
+  );
 
-  });
+}
 
 
-  books.forEach(book => {
+/* ================================
+   DISPLAY BOOKS
+   ================================ */
 
-    book.style.display =
-      "none";
+function updateBooks() {
 
-  });
+  const allBooks =
+    getAllBooks();
 
+
+  const matchingBooks =
+    getMatchingBooks();
+
+
+  /*
+     Hide every book first.
+  */
+
+  allBooks.forEach(
+    book => {
+
+      book.style.display =
+        "none";
+
+    }
+  );
+
+
+  /*
+     Show only the number
+     currently allowed.
+  */
 
   const visibleBooks =
     matchingBooks.slice(
@@ -2363,23 +2419,43 @@ function updateBooks() {
     );
 
 
-  visibleBooks.forEach(book => {
+  visibleBooks.forEach(
+    book => {
 
-    book.style.display =
-      "grid";
+      /*
+         Books already in index.html
+         are normally already attached
+         to the page.
 
-  });
+         Books from books.html need to
+         be attached when they become
+         visible.
+      */
+
+      if (
+        !bookList.contains(book)
+      ) {
+
+        bookList.appendChild(
+          book
+        );
+
+      }
+
+
+      book.style.display =
+        "grid";
+
+    }
+  );
 
 
   /*
-     Only show "No books found"
-     when the entire collection
-     has been loaded.
+     No-results message.
   */
 
   if (
-    matchingBooks.length === 0 &&
-    additionalBooksLoaded
+    matchingBooks.length === 0
   ) {
 
     noResults.style.display =
@@ -2395,75 +2471,24 @@ function updateBooks() {
 
   /*
      Determine whether there are
-     more books available.
-
-     There can be more books in
-     two different places:
-
-     1. Already loaded onto the page
-     2. Still waiting inside books.html
+     still matching books that have
+     not been displayed.
   */
 
-  const moreLoadedBooks =
+  const moreBooksAvailable =
     matchingBooks.length >
     booksToShow;
 
-  const moreStorageBooks =
-    additionalBooksLoaded &&
-    additionalBooksShown <
-    additionalBooks.length;
-
-  const storageNotLoaded =
-    !additionalBooksLoaded;
-
 
   if (
-    moreLoadedBooks ||
-    moreStorageBooks ||
-    storageNotLoaded
+    moreBooksAvailable
   ) {
 
     loadMoreContainer.style.display =
       "flex";
 
-
-    if (
-      additionalBooksLoaded
-    ) {
-
-      const remainingStorageBooks =
-        additionalBooks.length -
-        additionalBooksShown;
-
-
-      if (
-        moreLoadedBooks
-      ) {
-
-        const remainingMatches =
-          matchingBooks.length -
-          booksToShow;
-
-        loadMoreBtn.textContent =
-          "Load More (" +
-          remainingMatches.toLocaleString() +
-          " remaining)";
-
-      } else if (
-        remainingStorageBooks > 0
-      ) {
-
-        loadMoreBtn.textContent =
-          "Load More";
-
-      }
-
-    } else {
-
-      loadMoreBtn.textContent =
-        "Load More";
-
-    }
+    loadMoreBtn.textContent =
+      "Load More";
 
   } else {
 
@@ -2476,6 +2501,25 @@ function updateBooks() {
 
 
 /* ================================
+   RESET DISPLAY
+   ================================ */
+
+function resetAndUpdate() {
+
+  /*
+     Every new filter/search starts
+     at the first 100 matching books.
+  */
+
+  booksToShow =
+    booksPerLoad;
+
+  updateBooks();
+
+}
+
+
+/* ================================
    SEARCH
    ================================ */
 
@@ -2483,27 +2527,21 @@ searchInput.addEventListener(
   "input",
   async function() {
 
-    booksToShow =
-      booksPerLoad;
-
-
     /*
-       Search needs the entire
-       collection available so that
-       books inside books.html can
-       be found.
+       Searching needs the complete
+       collection available.
     */
 
-    if (
-      this.value.trim() !== ""
-    ) {
+    const loaded =
+      await loadAllBooksIntoMemory();
 
-      await loadAllBooks();
 
+    if (!loaded) {
+      return;
     }
 
 
-    updateBooks();
+    resetAndUpdate();
 
   }
 );
@@ -2513,52 +2551,60 @@ searchInput.addEventListener(
    GENRE BUTTONS
    ================================ */
 
-filterButtons.forEach(button => {
+filterButtons.forEach(
+  button => {
 
-  button.addEventListener(
-    "click",
-    async function() {
+    button.addEventListener(
+      "click",
+      async function() {
 
-      filterButtons.forEach(btn => {
+        filterButtons.forEach(
+          btn => {
 
-        btn.classList.remove(
+            btn.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+        this.classList.add(
           "active"
         );
 
-      });
 
-      this.classList.add(
-        "active"
-      );
-
-
-      currentGenre =
-        this.getAttribute(
-          "data-genre"
-        );
+        currentGenre =
+          this.getAttribute(
+            "data-genre"
+          );
 
 
-      booksToShow =
-        booksPerLoad;
+        /*
+           Genre filtering needs the
+           complete collection available.
+        */
+
+        const loaded =
+          await loadAllBooksIntoMemory();
 
 
-      /*
-         Genre filtering searches
-         the complete collection.
-      */
+        if (!loaded) {
+          return;
+        }
 
-      await loadAllBooks();
 
-      updateBooks();
+        resetAndUpdate();
 
-    }
-  );
+      }
+    );
 
-});
+  }
+);
 
 
 /* ================================
-   PAGE SLIDERS
+   MIN PAGE SLIDER
    ================================ */
 
 minPagesSlider.addEventListener(
@@ -2567,16 +2613,30 @@ minPagesSlider.addEventListener(
 
     updatePageRangeDisplay();
 
-    booksToShow =
-      booksPerLoad;
 
-    await loadAllBooks();
+    /*
+       Page filtering searches the
+       complete collection.
+    */
 
-    updateBooks();
+    const loaded =
+      await loadAllBooksIntoMemory();
+
+
+    if (!loaded) {
+      return;
+    }
+
+
+    resetAndUpdate();
 
   }
 );
 
+
+/* ================================
+   MAX PAGE SLIDER
+   ================================ */
 
 maxPagesSlider.addEventListener(
   "input",
@@ -2584,19 +2644,29 @@ maxPagesSlider.addEventListener(
 
     updatePageRangeDisplay();
 
-    booksToShow =
-      booksPerLoad;
 
-    await loadAllBooks();
+    /*
+       Page filtering searches the
+       complete collection.
+    */
 
-    updateBooks();
+    const loaded =
+      await loadAllBooksIntoMemory();
+
+
+    if (!loaded) {
+      return;
+    }
+
+
+    resetAndUpdate();
 
   }
 );
 
 
 /* ================================
-   LOAD MORE BUTTON
+   LOAD MORE
    ================================ */
 
 loadMoreBtn.addEventListener(
@@ -2608,12 +2678,12 @@ loadMoreBtn.addEventListener(
 
 
     /*
-       Load books.html if it has
-       not already been loaded.
+       Make sure the complete
+       collection is available.
     */
 
     const loaded =
-      await loadAdditionalBooks();
+      await loadAllBooksIntoMemory();
 
 
     if (!loaded) {
@@ -2627,49 +2697,13 @@ loadMoreBtn.addEventListener(
 
 
     /*
-       Add the next 100 books
-       from books.html.
-    */
-
-    const nextBooks =
-      additionalBooks.slice(
-        additionalBooksShown,
-        additionalBooksShown +
-          booksPerLoad
-      );
-
-
-    nextBooks.forEach(book => {
-
-      bookList.appendChild(book);
-
-    });
-
-
-    additionalBooksShown +=
-      nextBooks.length;
-
-
-    /*
-       Update the list of books
-       currently in the page.
-    */
-
-    books =
-      Array.from(
-        bookList.querySelectorAll(
-          ".book-item"
-        )
-      );
-
-
-    /*
-       Allow another 100 books
-       to become visible.
+       Increase the number of
+       matching books displayed
+       by exactly 100.
     */
 
     booksToShow +=
-      nextBooks.length;
+      booksPerLoad;
 
 
     updateBooks();
