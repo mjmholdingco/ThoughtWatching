@@ -52,8 +52,11 @@ body {
    HERO
    ================================ */
 
-.hero {
-  margin-bottom: 70px;
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
 }
 
 .hero .label {
